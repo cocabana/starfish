@@ -1,0 +1,7 @@
+Contract Changed(
+  changed: U256
+) {
+  pub fn getChanged() -> U256 {
+    return changed
+  }
+}

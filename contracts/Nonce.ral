@@ -1,0 +1,7 @@
+Contract Nonce(
+  nonce: U256
+) {
+  pub fn getNonce() -> U256 {
+    return nonce
+  }
+}

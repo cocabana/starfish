@@ -1,0 +1,30 @@
+Contract DIDRegistry(
+  // Not sure if mut is needed here for any of the variables in order to indicate mutability
+  owners: Address,
+  delegates: U256,
+  changed: U256,
+  nonce: U256
+) {
+    event DIDOwnerChanged(
+      identity: Address,
+      owner: Address,
+      previousChange: U256
+    )
+
+    event DIDDelegateChanged(
+      identity: Address,
+      delegateType: ByteVec,
+      delegate: Address,
+      validTo: U256,
+      previousChange: U256
+    )
+
+    event DIDAttributeChanged(
+      identity: Address,
+      name: ByteVec,
+      value: ByteVec,
+      validTo: U256,
+      previousChange: U256
+    )
+
+}
