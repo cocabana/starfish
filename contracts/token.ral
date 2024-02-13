@@ -1,0 +1,33 @@
+Contract TokenFaucet(
+    symbol: ByteVec,
+    name: ByteVec,
+    decimals: U256,
+    supply: U256,
+    mut balance: U256
+) {
+    pub fn getTotalSupply() -> U256 {
+        return supply
+    }
+
+    pub fn getSymbol() -> ByteVec {
+        return symbol
+    }
+
+    pub fn getName() -> ByteVec {
+        return name
+    }
+
+    pub fn getDecimals() -> U256 {
+        return decimals
+    }
+
+    pub fn getBalance() -> U256 {
+        return balance
+    }
+
+    @using(assetsInContract = true, updateFields = true, checkExternalCaller = false)
+    pub fn withdraw(amount: U256) -> () {
+        transferTokenFromSelf!(callerAddress!(), selfTokenId!(), amount)
+        balance = balance - amount
+    }
+}
