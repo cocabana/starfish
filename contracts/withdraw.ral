@@ -1,3 +1,0 @@
-TxScript Withdraw(token: TokenFaucet, amount: U256) {
-    token.withdraw(amount)
-}

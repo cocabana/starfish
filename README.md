@@ -28,3 +28,15 @@ docker-compose up -d
 cd docker
 docker-compose down
 ```
+
+### Compile and Deploy Smart Contracts
+```bash
+yarn compile
+yarn deploy
+```
+
+## Run Starfish CLI for Blockchain Interaction
+```bash
+cd packages/starfish-cli
+yarn start
+```

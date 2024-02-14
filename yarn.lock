@@ -24,15 +24,15 @@
     prettier "^2.8.7"
     yaml "^2.3.1"
 
-"@alephium/web3-test@v0.14.1":
-  version "0.14.1"
-  resolved "https://registry.yarnpkg.com/@alephium/web3-test/-/web3-test-0.14.1.tgz#20f725bd1a0c191ddaba1d08b91b135a2d737642"
-  integrity sha512-Nz/y5Va3ZqedkLoClLkprFDKHZglXNM0zQGFNJjmE5inuS62uWCoqql12wvN2/y0xhNEFa/C57N7W+CijN2WZQ==
+"@alephium/web3-test@v0.14.6":
+  version "0.14.6"
+  resolved "https://registry.yarnpkg.com/@alephium/web3-test/-/web3-test-0.14.6.tgz#34b8d67f300c51a355b495f1019662dc0ffe5fed"
+  integrity sha512-V1VIBbP6Gbmb8/3EmeJ98s9AGpdDBEzapg3iphkXtK0UjZQjNlvB3Urokb1BsCNl+JJcURT5vqXWKvG3ri/Iow==
   dependencies:
-    "@alephium/web3" "^0.14.1"
-    "@alephium/web3-wallet" "^0.14.1"
+    "@alephium/web3" "^0.14.6"
+    "@alephium/web3-wallet" "^0.14.6"
 
-"@alephium/web3-wallet@^0.14.1":
+"@alephium/web3-wallet@^0.14.1", "@alephium/web3-wallet@^0.14.6", "@alephium/web3-wallet@v0.14.6":
   version "0.14.6"
   resolved "https://registry.yarnpkg.com/@alephium/web3-wallet/-/web3-wallet-0.14.6.tgz#d9caf8ac2647adb5533cd1d3bafa56bcf98a4a0e"
   integrity sha512-2f/Vmq3vpuXecq2M/Oil0FcFlQCrOuU2JhLfCly8Wqzdgch0RkKcYFH0ZiswXRVN5fiDEwUR7BlLeH5B1Pg9Hw==
@@ -46,30 +46,12 @@
     elliptic "6.5.4"
     fs-extra "10.0.1"
 
-"@alephium/web3@^0.14.1", "@alephium/web3@^0.14.6":
+"@alephium/web3@^0.14.1", "@alephium/web3@^0.14.6", "@alephium/web3@v0.14.6":
   version "0.14.6"
   resolved "https://registry.yarnpkg.com/@alephium/web3/-/web3-0.14.6.tgz#45f538b88d8271f749a2736d2f762f093c16982e"
   integrity sha512-L0YyGRZUWU4IhblQgiy5h0uH65VwSiERwtseek3d4kL3rtDyW2c8t9jT62W29RzeN+t5bCXzn5Z+4gcARWqecg==
   dependencies:
     "@noble/secp256k1" "1.7.1"
-    base-x "4.0.0"
-    bignumber.js "^9.1.1"
-    blakejs "1.2.1"
-    bn.js "5.2.1"
-    buffer "^6.0.3"
-    cross-fetch "^3.1.5"
-    crypto-browserify "^3.12.0"
-    elliptic "6.5.4"
-    eventemitter3 "^4.0.7"
-    path-browserify "^1.0.1"
-
-"@alephium/web3@v0.14.1":
-  version "0.14.1"
-  resolved "https://registry.yarnpkg.com/@alephium/web3/-/web3-0.14.1.tgz#1907b8e1e4c8c32311ce9920ac41ce27b5eb9bbf"
-  integrity sha512-1alnSQcOADC2KL1CXCKTLUMOsdO6pTWBqlO0EccGpnpsBZr3BHjFKZP2ynpjB+5E2qSgFYmWAMVdp8lFEM7GcA==
-  dependencies:
-    "@noble/secp256k1" "1.7.1"
-    async-sema "^3.1.1"
     base-x "4.0.0"
     bignumber.js "^9.1.1"
     blakejs "1.2.1"
@@ -1353,11 +1335,6 @@ asn1.js@^5.2.0:
     inherits "^2.0.1"
     minimalistic-assert "^1.0.0"
     safer-buffer "^2.1.0"
-
-async-sema@^3.1.1:
-  version "3.1.1"
-  resolved "https://registry.yarnpkg.com/async-sema/-/async-sema-3.1.1.tgz#e527c08758a0f8f6f9f15f799a173ff3c40ea808"
-  integrity sha512-tLRNUXati5MFePdAk8dw7Qt7DpxPB60ofAgn8WRhW6a2rcimZnYBP9oxHiv0OHy+Wz7kPMG+t4LGdt31+4EmGg==
 
 asynckit@^0.4.0:
   version "0.4.0"

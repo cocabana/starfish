@@ -1,0 +1,3 @@
+TxScript SetAttribute(registrar: Registrar, identity: Address, name: ByteVec, value: ByteVec, validity:U256) {
+    registrar.setAttribute(identity, name, value, validity)
+}

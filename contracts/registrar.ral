@@ -1,0 +1,32 @@
+Contract Registrar(
+  recordTemplateId: ByteVec
+) extends Constants() {
+
+  fn getRecordContractId(identity: Address, caller: Address) -> ByteVec {
+    let node = blake2b!(toByteVec!(identity))
+    let recordId = subContractId!(node)
+    if (!contractExists!(recordId)) {
+        let (recordImmFields, recordMutFields) = Record.encodeFields!(identity, identity, 0)
+        copyCreateSubContract!{caller -> ALPH: 1 alph}(
+          node,
+          recordTemplateId,
+          recordImmFields,
+          recordMutFields
+        )
+    }
+    else {
+      let record = Record(recordId)
+      checkCaller!(caller == record.getOwner(), ErrorCodes.InvalidCaller)
+    }
+
+    return recordId
+  }
+
+  @using(checkExternalCaller = false)
+  pub fn setAttribute(identity: Address, name: ByteVec, value: ByteVec, validity:U256) -> () {
+    let recordId = getRecordContractId(identity, callerAddress!())
+    let record = Record(recordId)
+    record.setAttribute(callerAddress!(), name, value, validity)
+  }
+
+}

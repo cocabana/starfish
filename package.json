@@ -17,8 +17,9 @@
     "prettier": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\""
   },
   "dependencies": {
-    "@alephium/web3": "v0.14.1",
-    "@alephium/web3-test": "v0.14.1"
+    "@alephium/web3": "v0.14.6",
+    "@alephium/web3-test": "v0.14.6",
+    "@alephium/web3-wallet": "v0.14.6"
   },
   "devDependencies": {
     "@alephium/cli": "v0.14.1",
