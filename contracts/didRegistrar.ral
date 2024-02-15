@@ -13,8 +13,7 @@ Contract DIDRegistrar(
           didRecordImmFields,
           didRecordMutFields
         )
-    }
-    else {
+    } else {
       let didRecord = DIDRecord(didRecordId)
       checkCaller!(caller == didRecord.getOwner(), ErrorCodes.InvalidCaller)
     }
@@ -22,18 +21,31 @@ Contract DIDRegistrar(
     return didRecordId
   }
 
-  @using(checkExternalCaller = false)
-  pub fn setAttribute(identity: Address, name: U256, value: ByteVec, validity:U256) -> () {
+  @using(preapprovedAssets = true)
+  pub fn register(identity: Address) -> () {
+    checkCaller!(callerAddress!() == identity, ErrorCodes.InvalidCaller)
+    let node = blake2b!(toByteVec!(identity))
+    let (didRecordImmFields, didRecordMutFields) = DIDRecord.encodeFields!(identity, identity, 0)
+    copyCreateSubContract!{identity -> ALPH: 1 alph}(
+      node,
+      didRecordContractId,
+      didRecordImmFields,
+      didRecordMutFields
+    )
+  }
+
+  @using(preapprovedAssets = true, checkExternalCaller = false)
+  pub fn setAttribute(identity: Address, name: U256, value: ByteVec, validity: U256) -> () {
     let didRecordId = getDIDRecordContractId(identity, callerAddress!())
     let didRecord = DIDRecord(didRecordId)
     didRecord.setAttribute(callerAddress!(), name, value, validity)
   }
 
-    @using(checkExternalCaller = false)
-    pub fn revokeAttribute(identity: Address, name: U256, value: ByteVec) -> () {
-      let didRecordId = getDIDRecordContractId(identity, callerAddress!())
-      let didRecord = DIDRecord(didRecordId)
-      didRecord.revokeAttribute(callerAddress!(), name, value)
-    }
+  @using(checkExternalCaller = false)
+  pub fn revokeAttribute(identity: Address, name: U256, value: ByteVec) -> () {
+    let didRecordId = getDIDRecordContractId(identity, callerAddress!())
+    let didRecord = DIDRecord(didRecordId)
+    didRecord.revokeAttribute(callerAddress!(), name, value)
+  }
 
 }

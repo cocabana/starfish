@@ -11,9 +11,14 @@ import {
   SignerProvider,
   HexString,
 } from "@alephium/web3";
+import { default as RegisterScriptJson } from "../Register.ral.json";
 import { default as SetAttributeScriptJson } from "../SetAttribute.ral.json";
 import { default as RevokeAttributeScriptJson } from "../RevokeAttribute.ral.json";
 
+export const Register = new ExecutableScript<{
+  registrar: HexString;
+  identity: Address;
+}>(Script.fromJson(RegisterScriptJson));
 export const SetAttribute = new ExecutableScript<{
   registrar: HexString;
   identity: Address;

@@ -55,6 +55,14 @@ class Factory extends ContractFactory<
     ): Promise<TestContractResult<HexString>> => {
       return testMethod(this, "getDIDRecordContractId", params);
     },
+    register: async (
+      params: TestContractParams<
+        DIDRegistrarTypes.Fields,
+        { identity: Address }
+      >
+    ): Promise<TestContractResult<null>> => {
+      return testMethod(this, "register", params);
+    },
     setAttribute: async (
       params: TestContractParams<
         DIDRegistrarTypes.Fields,
@@ -79,7 +87,7 @@ export const DIDRegistrar = new Factory(
   Contract.fromJson(
     DIDRegistrarContractJson,
     "",
-    "787c1846fc4fb51e29b7595dc40d537aadf616d799bef6669866e2e25552a809"
+    "993156a0ff3235add6408b6d054b461ee1ee1105dffd648750162af20c5cf649"
   )
 );
 

@@ -20,7 +20,7 @@ Contract DIDRecord(
     }
 
     @using(updateFields = true)
-    pub fn setAttribute(actor: Address, name: U256, value: ByteVec, validity:U256) -> () {
+    pub fn setAttribute(actor: Address, name: U256, value: ByteVec, validity: U256) -> () {
       checkCaller!(owner == actor, ErrorCodes.InvalidCaller)
       emit DIDAttributeChanged(identity, name, value, blockTimeStamp!() + validity, changed)
       changed = blockTimeStamp!()
