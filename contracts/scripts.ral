@@ -1,3 +1,7 @@
-TxScript SetAttribute(registrar: Registrar, identity: Address, name: ByteVec, value: ByteVec, validity:U256) {
+TxScript SetAttribute(registrar: DIDRegistrar, identity: Address, name: U256, value: ByteVec, validity: U256) {
     registrar.setAttribute(identity, name, value, validity)
+}
+
+TxScript RevokeAttribute(registrar: DIDRegistrar, identity: Address, name: U256, value: ByteVec) {
+    registrar.revokeAttribute(identity, name, value)
 }

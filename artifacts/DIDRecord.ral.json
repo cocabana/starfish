@@ -1,0 +1,147 @@
+{
+  "version": "v2.3.5",
+  "name": "DIDRecord",
+  "bytecode": "03040940244042405d010000000102a0000201000101000eb4a000450c7b1600a10005ce001600a0016056a101010004040010a0001600450c7b06ce00160116025616032aa0017356a10101000303000ea0001600450c7b06ce00160116020ca0017356a101",
+  "codeHash": "e8a430a6dac34b3be9acf254f3ce4359e85b7f1f94e0afd984272151d6af1591",
+  "fieldsSig": {
+    "names": [
+      "identity",
+      "owner",
+      "changed"
+    ],
+    "types": [
+      "Address",
+      "Address",
+      "U256"
+    ],
+    "isMutable": [
+      false,
+      true,
+      true
+    ]
+  },
+  "eventsSig": [
+    {
+      "name": "DIDOwnerChanged",
+      "fieldNames": [
+        "identity",
+        "owner",
+        "previousChange"
+      ],
+      "fieldTypes": [
+        "Address",
+        "Address",
+        "U256"
+      ]
+    },
+    {
+      "name": "DIDAttributeChanged",
+      "fieldNames": [
+        "identity",
+        "name",
+        "value",
+        "validTo",
+        "previousChange"
+      ],
+      "fieldTypes": [
+        "Address",
+        "U256",
+        "ByteVec",
+        "U256",
+        "U256"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "name": "getOwner",
+      "usePreapprovedAssets": false,
+      "useAssetsInContract": false,
+      "isPublic": true,
+      "paramNames": [],
+      "paramTypes": [],
+      "paramIsMutable": [],
+      "returnTypes": [
+        "Address"
+      ]
+    },
+    {
+      "name": "setOwner",
+      "usePreapprovedAssets": false,
+      "useAssetsInContract": false,
+      "isPublic": true,
+      "paramNames": [
+        "newOwner"
+      ],
+      "paramTypes": [
+        "Address"
+      ],
+      "paramIsMutable": [
+        false
+      ],
+      "returnTypes": []
+    },
+    {
+      "name": "setAttribute",
+      "usePreapprovedAssets": false,
+      "useAssetsInContract": false,
+      "isPublic": true,
+      "paramNames": [
+        "actor",
+        "name",
+        "value",
+        "validity"
+      ],
+      "paramTypes": [
+        "Address",
+        "U256",
+        "ByteVec",
+        "U256"
+      ],
+      "paramIsMutable": [
+        false,
+        false,
+        false,
+        false
+      ],
+      "returnTypes": []
+    },
+    {
+      "name": "revokeAttribute",
+      "usePreapprovedAssets": false,
+      "useAssetsInContract": false,
+      "isPublic": true,
+      "paramNames": [
+        "actor",
+        "name",
+        "value"
+      ],
+      "paramTypes": [
+        "Address",
+        "U256",
+        "ByteVec"
+      ],
+      "paramIsMutable": [
+        false,
+        false,
+        false
+      ],
+      "returnTypes": []
+    }
+  ],
+  "constants": [],
+  "enums": [
+    {
+      "name": "ErrorCodes",
+      "fields": [
+        {
+          "name": "InvalidCaller",
+          "value": {
+            "type": "U256",
+            "value": "0"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,11 +1,11 @@
-Contract Record(
+Contract DIDRecord(
     identity: Address,
     mut owner: Address,
     mut changed: U256
 ) extends Constants() {
 
     event DIDOwnerChanged(identity: Address, owner: Address, previousChange: U256)
-    event DIDAttributeChanged(identity: Address, name: ByteVec, value: ByteVec, validTo: U256, previousChange: U256)
+    event DIDAttributeChanged(identity: Address, name: U256, value: ByteVec, validTo: U256, previousChange: U256)
 
     pub fn getOwner() -> Address {
         return owner
@@ -20,14 +20,14 @@ Contract Record(
     }
 
     @using(updateFields = true)
-    pub fn setAttribute(actor: Address, name: ByteVec, value: ByteVec, validity:U256) -> () {
+    pub fn setAttribute(actor: Address, name: U256, value: ByteVec, validity:U256) -> () {
       checkCaller!(owner == actor, ErrorCodes.InvalidCaller)
       emit DIDAttributeChanged(identity, name, value, blockTimeStamp!() + validity, changed)
       changed = blockTimeStamp!()
     }
 
     @using(updateFields = true)
-    pub fn revokeAttribute(actor: Address, name: ByteVec, value: ByteVec) -> () {
+    pub fn revokeAttribute(actor: Address, name: U256, value: ByteVec) -> () {
         checkCaller!(owner == actor, ErrorCodes.InvalidCaller)
         emit DIDAttributeChanged(identity, name, value, 0, changed)
         changed = blockTimeStamp!()
