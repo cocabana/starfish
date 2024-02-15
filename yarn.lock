@@ -7,16 +7,17 @@
   resolved "https://registry.yarnpkg.com/@aashutoshrathi/word-wrap/-/word-wrap-1.2.6.tgz#bd9154aec9983f77b3a034ecaa015c2e4201f6cf"
   integrity sha512-1Yjs2SvM8TflER/OD3cOjhWWOZb58A2t7wpE2S9XfBYTiIl+XFhQG2bjy4Pu1I+EAlCNUzRDYDdFwFYUKvXcIA==
 
-"@alephium/cli@v0.14.1":
-  version "0.14.1"
-  resolved "https://registry.yarnpkg.com/@alephium/cli/-/cli-0.14.1.tgz#37318c1d6a0516c65a5ae1a13859595e492777fd"
-  integrity sha512-isCCfyXAAoA76uj/IjGBsM5vD9+1H3jfVLlnsJCbLlpcV9Qyuh9qiBGYkJyChse37VCV5eUmYOQr78EU7uMyjA==
+"@alephium/cli@0.29.3":
+  version "0.29.3"
+  resolved "https://registry.yarnpkg.com/@alephium/cli/-/cli-0.29.3.tgz#78877281ca5e1a2d9b7b311207d8d597a7d17c02"
+  integrity sha512-0dgLxQDXALwjVUvYD2VQiYvezMz+O+nFgHSzyTJ6k5n2ooCUhWFNx5F+WS+oBowFXRX1ADALpKRBeuAO+kU7tw==
   dependencies:
-    "@alephium/web3" "^0.14.1"
-    "@alephium/web3-wallet" "^0.14.1"
+    "@alephium/web3" "^0.29.3"
+    "@alephium/web3-wallet" "^0.29.3"
     commander "^9.5.0"
     cross-fetch "^3.1.5"
-    crypto-js "^4.1.1"
+    crypto-js "^4.2.0"
+    fetch-retry "^5.0.6"
     fs-extra "^10.1.0"
     ipfs-http-client "^56.0.0"
     jest "^28.1.3"
@@ -24,20 +25,20 @@
     prettier "^2.8.7"
     yaml "^2.3.1"
 
-"@alephium/web3-test@v0.14.6":
-  version "0.14.6"
-  resolved "https://registry.yarnpkg.com/@alephium/web3-test/-/web3-test-0.14.6.tgz#34b8d67f300c51a355b495f1019662dc0ffe5fed"
-  integrity sha512-V1VIBbP6Gbmb8/3EmeJ98s9AGpdDBEzapg3iphkXtK0UjZQjNlvB3Urokb1BsCNl+JJcURT5vqXWKvG3ri/Iow==
+"@alephium/web3-test@0.29.3":
+  version "0.29.3"
+  resolved "https://registry.yarnpkg.com/@alephium/web3-test/-/web3-test-0.29.3.tgz#06259845823ea8336c021ad5684f05adec7d863c"
+  integrity sha512-/GUjbvrzECubruvdCr/Jbc8uKa346qh2sJf7k5CoCRdhv2Y+3M2ow+JRcFnr/OQjuc4mn7gih6y2hLBySFWVVg==
   dependencies:
-    "@alephium/web3" "^0.14.6"
-    "@alephium/web3-wallet" "^0.14.6"
+    "@alephium/web3" "^0.29.3"
+    "@alephium/web3-wallet" "^0.29.3"
 
-"@alephium/web3-wallet@^0.14.1", "@alephium/web3-wallet@^0.14.6", "@alephium/web3-wallet@v0.14.6":
-  version "0.14.6"
-  resolved "https://registry.yarnpkg.com/@alephium/web3-wallet/-/web3-wallet-0.14.6.tgz#d9caf8ac2647adb5533cd1d3bafa56bcf98a4a0e"
-  integrity sha512-2f/Vmq3vpuXecq2M/Oil0FcFlQCrOuU2JhLfCly8Wqzdgch0RkKcYFH0ZiswXRVN5fiDEwUR7BlLeH5B1Pg9Hw==
+"@alephium/web3-wallet@0.29.3", "@alephium/web3-wallet@^0.29.3":
+  version "0.29.3"
+  resolved "https://registry.yarnpkg.com/@alephium/web3-wallet/-/web3-wallet-0.29.3.tgz#989dafe320955ab4274357c30737009d663d9796"
+  integrity sha512-foC29VRNdsc1dTFDM+k6i1znkhzVf5y0OduC3P5axocJyP5HzWUMM1Ln2VU3GPk5paYXtG/x/qYA/51iaYiPCg==
   dependencies:
-    "@alephium/web3" "^0.14.6"
+    "@alephium/web3" "^0.29.3"
     "@noble/secp256k1" "1.7.1"
     "@types/node" "^16.18.23"
     bip32 "3.1.0"
@@ -46,10 +47,10 @@
     elliptic "6.5.4"
     fs-extra "10.0.1"
 
-"@alephium/web3@^0.14.1", "@alephium/web3@^0.14.6", "@alephium/web3@v0.14.6":
-  version "0.14.6"
-  resolved "https://registry.yarnpkg.com/@alephium/web3/-/web3-0.14.6.tgz#45f538b88d8271f749a2736d2f762f093c16982e"
-  integrity sha512-L0YyGRZUWU4IhblQgiy5h0uH65VwSiERwtseek3d4kL3rtDyW2c8t9jT62W29RzeN+t5bCXzn5Z+4gcARWqecg==
+"@alephium/web3@0.29.3", "@alephium/web3@^0.29.3":
+  version "0.29.3"
+  resolved "https://registry.yarnpkg.com/@alephium/web3/-/web3-0.29.3.tgz#0ff03134a250d33e30f3efbb16804ddead872ae6"
+  integrity sha512-4+NpVkSdddEEd3CtoP0+ZV00bslGEx86YwnHGrDuPJ8EK+CLWb7WsrmqL088IzwzGQ26u6aRKY+aV+ihv9k70A==
   dependencies:
     "@noble/secp256k1" "1.7.1"
     base-x "4.0.0"
@@ -62,6 +63,7 @@
     elliptic "6.5.4"
     eventemitter3 "^4.0.7"
     path-browserify "^1.0.1"
+    stream-browserify "^3.0.0"
 
 "@ampproject/remapping@^2.2.0":
   version "2.2.1"
@@ -1864,7 +1866,7 @@ crypto-browserify@^3.12.0:
     randombytes "^2.0.0"
     randomfill "^1.0.3"
 
-crypto-js@^4.1.1:
+crypto-js@^4.2.0:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/crypto-js/-/crypto-js-4.2.0.tgz#4d931639ecdfd12ff80e8186dba6af2c2e856631"
   integrity sha512-KALDyEYgpY+Rlob/iriUtjV6d5Eq+Y191A5g4UqLAi8CyGP9N1+FdVbkc1SxKc2r4YAYqG8JzO2KGL+AizD70Q==
@@ -2291,6 +2293,11 @@ fb-watchman@^2.0.0:
   dependencies:
     bser "2.1.1"
 
+fetch-retry@^5.0.6:
+  version "5.0.6"
+  resolved "https://registry.yarnpkg.com/fetch-retry/-/fetch-retry-5.0.6.tgz#17d0bc90423405b7a88b74355bf364acd2a7fa56"
+  integrity sha512-3yurQZ2hD9VISAhJJP9bpYFNQrHHBXE2JxxjY5aLEcDi46RmAzJE2OC9FAde0yis5ElW0jTTzs0zfg/Cca4XqQ==
+
 file-entry-cache@^6.0.1:
   version "6.0.1"
   resolved "https://registry.yarnpkg.com/file-entry-cache/-/file-entry-cache-6.0.1.tgz#211b2dd9659cb0394b073e7323ac3c933d522027"
@@ -2571,7 +2578,7 @@ inflight@^1.0.4:
     once "^1.3.0"
     wrappy "1"
 
-inherits@2, inherits@^2.0.1, inherits@^2.0.3, inherits@^2.0.4:
+inherits@2, inherits@^2.0.1, inherits@^2.0.3, inherits@^2.0.4, inherits@~2.0.4:
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/inherits/-/inherits-2.0.4.tgz#0fa2c64f932917c3433a0ded55363aae37416b7c"
   integrity sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==
@@ -4218,7 +4225,7 @@ react-native-fetch-api@^3.0.0:
   dependencies:
     p-defer "^3.0.0"
 
-readable-stream@^3.6.0, readable-stream@^3.6.2:
+readable-stream@^3.5.0, readable-stream@^3.6.0, readable-stream@^3.6.2:
   version "3.6.2"
   resolved "https://registry.yarnpkg.com/readable-stream/-/readable-stream-3.6.2.tgz#56a9b36ea965c00c5a93ef31eb111a0f11056967"
   integrity sha512-9u/sniCrY3D5WdsERHzHE4G2YCXqoG5FTHUiCC4SIbr6XcLZBY05ya9EKjYek9O5xOAwjGq+1JdGBAS7Q9ScoA==
@@ -4393,6 +4400,14 @@ stack-utils@^2.0.3:
   integrity sha512-XlkWvfIm6RmsWtNJx+uqtKLS8eqFbxUg0ZzLXqY0caEy9l7hruX8IpiDnjsLavoBgqCCR71TqWO8MaXYheJ3RQ==
   dependencies:
     escape-string-regexp "^2.0.0"
+
+stream-browserify@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/stream-browserify/-/stream-browserify-3.0.0.tgz#22b0a2850cdf6503e73085da1fc7b7d0c2122f2f"
+  integrity sha512-H73RAHsVBapbim0tU2JwwOiXUj+fikfiaoYAKHF3VJfA0pe2BCzkhAHBlLG6REzE+2WNZcxOXjK7lkso+9euLA==
+  dependencies:
+    inherits "~2.0.4"
+    readable-stream "^3.5.0"
 
 stream-to-it@^0.2.2:
   version "0.2.4"

@@ -9,7 +9,7 @@ import {
   TestContractResult,
   HexString,
   ContractFactory,
-  SubscribeOptions,
+  EventSubscribeOptions,
   EventSubscription,
   CallContractParams,
   CallContractResult,
@@ -40,6 +40,10 @@ class Factory extends ContractFactory<
   DIDRegistrarInstance,
   DIDRegistrarTypes.Fields
 > {
+  getInitialFieldsWithDefaultValues() {
+    return this.contract.getInitialFieldsWithDefaultValues() as DIDRegistrarTypes.Fields;
+  }
+
   consts = { ErrorCodes: { InvalidCaller: BigInt(0) } };
 
   at(address: string): DIDRegistrarInstance {
@@ -54,14 +58,6 @@ class Factory extends ContractFactory<
       >
     ): Promise<TestContractResult<HexString>> => {
       return testMethod(this, "getDIDRecordContractId", params);
-    },
-    register: async (
-      params: TestContractParams<
-        DIDRegistrarTypes.Fields,
-        { identity: Address }
-      >
-    ): Promise<TestContractResult<null>> => {
-      return testMethod(this, "register", params);
     },
     setAttribute: async (
       params: TestContractParams<
@@ -87,7 +83,7 @@ export const DIDRegistrar = new Factory(
   Contract.fromJson(
     DIDRegistrarContractJson,
     "",
-    "993156a0ff3235add6408b6d054b461ee1ee1105dffd648750162af20c5cf649"
+    "1993526223ed2c98b2411d8647ea5a9214e87a23c0e71e67eb9ec70fad030b4c"
   )
 );
 

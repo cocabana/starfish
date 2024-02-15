@@ -1,7 +1,3 @@
-TxScript Register(registrar: DIDRegistrar, identity: Address) {
-    // 1 alph for new subcontract
-    registrar.register{callerAddress!() -> ALPH: 1 alph}(identity)
-}
 
 TxScript SetAttribute(registrar: DIDRegistrar, identity: Address, name: U256, value: ByteVec, validity: U256) {
     // 1 alph if a new subcontract gets created

@@ -11,14 +11,15 @@ import {
   SignerProvider,
   HexString,
 } from "@alephium/web3";
-import { default as RegisterScriptJson } from "../Register.ral.json";
-import { default as SetAttributeScriptJson } from "../SetAttribute.ral.json";
 import { default as RevokeAttributeScriptJson } from "../RevokeAttribute.ral.json";
+import { default as SetAttributeScriptJson } from "../SetAttribute.ral.json";
 
-export const Register = new ExecutableScript<{
+export const RevokeAttribute = new ExecutableScript<{
   registrar: HexString;
   identity: Address;
-}>(Script.fromJson(RegisterScriptJson));
+  name: bigint;
+  value: HexString;
+}>(Script.fromJson(RevokeAttributeScriptJson));
 export const SetAttribute = new ExecutableScript<{
   registrar: HexString;
   identity: Address;
@@ -26,9 +27,3 @@ export const SetAttribute = new ExecutableScript<{
   value: HexString;
   validity: bigint;
 }>(Script.fromJson(SetAttributeScriptJson));
-export const RevokeAttribute = new ExecutableScript<{
-  registrar: HexString;
-  identity: Address;
-  name: bigint;
-  value: HexString;
-}>(Script.fromJson(RevokeAttributeScriptJson));

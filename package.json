@@ -17,12 +17,12 @@
     "prettier": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\""
   },
   "dependencies": {
-    "@alephium/web3": "v0.14.6",
-    "@alephium/web3-test": "v0.14.6",
-    "@alephium/web3-wallet": "v0.14.6"
+    "@alephium/web3": "0.29.3",
+    "@alephium/web3-test": "0.29.3",
+    "@alephium/web3-wallet": "0.29.3"
   },
   "devDependencies": {
-    "@alephium/cli": "v0.14.1",
+    "@alephium/cli": "0.29.3",
     "@types/jest": "^27.5.1",
     "@types/node": "18.11.18",
     "@typescript-eslint/eslint-plugin": "^5.51.0",

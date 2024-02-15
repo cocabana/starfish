@@ -9,7 +9,7 @@ import {
   TestContractResult,
   HexString,
   ContractFactory,
-  SubscribeOptions,
+  EventSubscribeOptions,
   EventSubscription,
   CallContractParams,
   CallContractResult,
@@ -74,6 +74,11 @@ class Factory extends ContractFactory<
   DIDRecordInstance,
   DIDRecordTypes.Fields
 > {
+  getInitialFieldsWithDefaultValues() {
+    return this.contract.getInitialFieldsWithDefaultValues() as DIDRecordTypes.Fields;
+  }
+
+  eventIndex = { DIDOwnerChanged: 0, DIDAttributeChanged: 1 };
   consts = { ErrorCodes: { InvalidCaller: BigInt(0) } };
 
   at(address: string): DIDRecordInstance {
@@ -134,7 +139,7 @@ export class DIDRecordInstance extends ContractInstance {
   }
 
   subscribeDIDOwnerChangedEvent(
-    options: SubscribeOptions<DIDRecordTypes.DIDOwnerChangedEvent>,
+    options: EventSubscribeOptions<DIDRecordTypes.DIDOwnerChangedEvent>,
     fromCount?: number
   ): EventSubscription {
     return subscribeContractEvent(
@@ -147,7 +152,7 @@ export class DIDRecordInstance extends ContractInstance {
   }
 
   subscribeDIDAttributeChangedEvent(
-    options: SubscribeOptions<DIDRecordTypes.DIDAttributeChangedEvent>,
+    options: EventSubscribeOptions<DIDRecordTypes.DIDAttributeChangedEvent>,
     fromCount?: number
   ): EventSubscription {
     return subscribeContractEvent(
@@ -160,7 +165,7 @@ export class DIDRecordInstance extends ContractInstance {
   }
 
   subscribeAllEvents(
-    options: SubscribeOptions<
+    options: EventSubscribeOptions<
       | DIDRecordTypes.DIDOwnerChangedEvent
       | DIDRecordTypes.DIDAttributeChangedEvent
     >,

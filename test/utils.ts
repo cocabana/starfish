@@ -16,6 +16,5 @@ export function stringToHex (str: string)  {
 
 export function u256ToString(input: BigInt): string {
   const buff: Buffer =  Buffer.from(input.toString(16), 'hex');
-  console.log('bytes32toString', input.toString(16),'\n', buff.toString('utf8'));
   return buff.toString('utf8').replace(/\0+$/, '')
 }
