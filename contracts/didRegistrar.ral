@@ -2,30 +2,43 @@ Contract DIDRegistrar(
   didRecordContractId: ByteVec
 ) extends Constants() {
 
-  fn getDIDRecordContractId(identity: Address, caller: Address) -> ByteVec {
-    let node = blake2b!(toByteVec!(identity))
-    let didRecordId = subContractId!(node)
-    if (!contractExists!(didRecordId)) {
-        let (didRecordImmFields, didRecordMutFields) = DIDRecord.encodeFields!(identity, identity, 0)
-        copyCreateSubContract!{caller -> ALPH: 1 alph}(
-          node,
-          didRecordContractId,
-          didRecordImmFields,
-          didRecordMutFields
-        )
-    } else {
-      let didRecord = DIDRecord(didRecordId)
-      checkCaller!(caller == didRecord.getOwner(), ErrorCodes.InvalidCaller)
-    }
+  event DIDRegistered(
+    parentContractId: ByteVec, subContractPath: ByteVec, identity: Address
+  )
 
+  fn getDIDRecordContractId(identity: Address, caller: Address) -> ByteVec {
+    let node = addressToByteVec(identity)
+    let didRecordId = subContractId!(node)
+    let didRecord = DIDRecord(didRecordId)
+    checkCaller!(caller == didRecord.getOwner(), ErrorCodes.InvalidCaller)
     return didRecordId
   }
 
-  @using(preapprovedAssets = true, checkExternalCaller = false)
+  fn addressToByteVec(address: Address) -> ByteVec {
+    return toByteVec!(address)
+  }
+
+  @using(preapprovedAssets = true)
+  pub fn register(identity: Address) -> () {
+      checkCaller!(callerAddress!() == identity, ErrorCodes.InvalidCaller)
+      let node = addressToByteVec(identity)
+      let (immFields, mutFields) = DIDRecord.encodeFields!(identity, identity, 0)
+      copyCreateSubContract!{callerAddress!() -> ALPH: 1 alph}(
+        node,
+        didRecordContractId,
+        immFields,
+        mutFields
+      )
+      emit DIDRegistered(selfContractId!(), node, identity)
+  }
+
+  @using(checkExternalCaller = true)
   pub fn setAttribute(identity: Address, name: U256, value: ByteVec, validity: U256) -> () {
-    let didRecordId = getDIDRecordContractId(identity, callerAddress!())
+    let caller = callerAddress!()
+    checkCaller!(caller == identity, ErrorCodes.InvalidCaller)
+    let didRecordId = getDIDRecordContractId(identity, caller)
     let didRecord = DIDRecord(didRecordId)
-    didRecord.setAttribute(callerAddress!(), name, value, validity)
+    didRecord.setAttribute(caller, name, value, validity)
   }
 
   @using(checkExternalCaller = false)

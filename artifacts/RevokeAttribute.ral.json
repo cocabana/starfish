@@ -1,7 +1,7 @@
 {
-  "version": "v2.8.3",
+  "version": "v2.8.5",
   "name": "RevokeAttribute",
-  "bytecodeTemplate": "01010300000007{1}{2}{3}0f0c{0}0102",
+  "bytecodeTemplate": "01010300000007{1}{2}{3}0f0c{0}0104",
   "fieldsSig": {
     "names": [
       "registrar",

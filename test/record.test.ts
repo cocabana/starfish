@@ -1,5 +1,5 @@
 import {prepareForTests, stringToU256, u256ToString} from "./utils";
-import {DIDRecord} from "../artifacts/ts";
+import {DIDRecord, DIDRegistrar} from "../artifacts/ts";
 import {randomContractAddress, testNodeWallet} from "@alephium/web3-test";
 
 import {Address} from "@alephium/web3/src/signer/types";
@@ -12,6 +12,7 @@ describe("DIDRecord", () => {
     await prepareForTests();
   });
 
+
   it("should emit event and update changed after setAttribute", async () => {
     const signer = await testNodeWallet();
     const accounts = await signer.getAccounts();
@@ -23,6 +24,8 @@ describe("DIDRecord", () => {
         testArgs: {actor: owner, name: stringToU256("did/svc/test1"), validity: ONE_YEAR_SECONDS, value: stringToHex("value1")},
         initialFields: { identity: owner, owner, changed: 170795n }
       });
+
+    console.log('debugMessages', result.debugMessages);
 
     const event = result.events.find(
       (e) => {
@@ -42,3 +45,6 @@ describe("DIDRecord", () => {
 
   })
 })
+//45417495254040156915466720131619015715318644276254888134575742153988524474368n
+//45417495254040156915466720131619015715318644276254888134575742153988524474368n
+//45417495254040156915466720131619015715318644276254888134575742153988524474368

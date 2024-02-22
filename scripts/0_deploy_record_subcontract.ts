@@ -8,11 +8,11 @@ const deploy: DeployFunction = async (deployer: Deployer): Promise<void> => {
     initialFields,
   });
 
-  console.log("Deployed 'Record' contract template with initial state");
-  console.table(initialFields);
+  console.log("Deployed 'Record' contract template");
   console.log(`Contract id: ${result.contractInstance.contractId}`);
   console.log(`Contract address: ${result.contractInstance.address}`);
   console.log(`Contract group: ${result.contractInstance.groupIndex}`);
+  console.table(initialFields);
 };
 
 export default deploy;

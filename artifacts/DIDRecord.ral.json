@@ -1,8 +1,8 @@
 {
-  "version": "v2.8.3",
+  "version": "v2.8.5",
   "name": "DIDRecord",
-  "bytecode": "03040940244042405d010000000102a0000201000101000eb4a000450c7b1600a10005ce001600a0016056a101010004040010a0001600450c7b06ce00160116025616032aa0017356a10101000303000ea0001600450c7b06ce00160116020ca0017356a101",
-  "codeHash": "e8a430a6dac34b3be9acf254f3ce4359e85b7f1f94e0afd984272151d6af1591",
+  "bytecode": "030409402540444060010000000102a0000201000101000fb4a000450c7b1600a10005ce0016005fa0010d2aa101010004040011a0001600450c7b06ce00160116025616032a61a0010d2aa10101000303000fa0001600450c7b06ce00160116020c61a0010d2aa101",
+  "codeHash": "4661e0f51d42cb8b1fe54c0190d02eea19ce94505abf101d105823c780b38235",
   "fieldsSig": {
     "names": [
       "identity",
@@ -25,13 +25,11 @@
       "name": "DIDOwnerChanged",
       "fieldNames": [
         "identity",
-        "owner",
-        "previousChange"
+        "owner"
       ],
       "fieldTypes": [
         "Address",
-        "Address",
-        "U256"
+        "Address"
       ]
     },
     {
@@ -40,14 +38,12 @@
         "identity",
         "name",
         "value",
-        "validTo",
-        "previousChange"
+        "validTo"
       ],
       "fieldTypes": [
         "Address",
         "U256",
         "ByteVec",
-        "U256",
         "U256"
       ]
     }

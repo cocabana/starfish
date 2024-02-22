@@ -34,6 +34,12 @@ export namespace DIDRegistrarTypes {
   };
 
   export type State = ContractState<Fields>;
+
+  export type DIDRegisteredEvent = ContractEvent<{
+    parentContractId: HexString;
+    subContractPath: HexString;
+    identity: Address;
+  }>;
 }
 
 class Factory extends ContractFactory<
@@ -44,6 +50,7 @@ class Factory extends ContractFactory<
     return this.contract.getInitialFieldsWithDefaultValues() as DIDRegistrarTypes.Fields;
   }
 
+  eventIndex = { DIDRegistered: 0 };
   consts = { ErrorCodes: { InvalidCaller: BigInt(0) } };
 
   at(address: string): DIDRegistrarInstance {
@@ -58,6 +65,19 @@ class Factory extends ContractFactory<
       >
     ): Promise<TestContractResult<HexString>> => {
       return testMethod(this, "getDIDRecordContractId", params);
+    },
+    addressToByteVec: async (
+      params: TestContractParams<DIDRegistrarTypes.Fields, { address: Address }>
+    ): Promise<TestContractResult<HexString>> => {
+      return testMethod(this, "addressToByteVec", params);
+    },
+    register: async (
+      params: TestContractParams<
+        DIDRegistrarTypes.Fields,
+        { identity: Address }
+      >
+    ): Promise<TestContractResult<null>> => {
+      return testMethod(this, "register", params);
     },
     setAttribute: async (
       params: TestContractParams<
@@ -83,7 +103,7 @@ export const DIDRegistrar = new Factory(
   Contract.fromJson(
     DIDRegistrarContractJson,
     "",
-    "1993526223ed2c98b2411d8647ea5a9214e87a23c0e71e67eb9ec70fad030b4c"
+    "121b19a2b6ed634c07030dbcd011515f10ac7b6c349248a713b330572e775428"
   )
 );
 
@@ -95,5 +115,22 @@ export class DIDRegistrarInstance extends ContractInstance {
 
   async fetchState(): Promise<DIDRegistrarTypes.State> {
     return fetchContractState(DIDRegistrar, this);
+  }
+
+  async getContractEventsCurrentCount(): Promise<number> {
+    return getContractEventsCurrentCount(this.address);
+  }
+
+  subscribeDIDRegisteredEvent(
+    options: EventSubscribeOptions<DIDRegistrarTypes.DIDRegisteredEvent>,
+    fromCount?: number
+  ): EventSubscription {
+    return subscribeContractEvent(
+      DIDRegistrar.contract,
+      this,
+      options,
+      "DIDRegistered",
+      fromCount
+    );
   }
 }

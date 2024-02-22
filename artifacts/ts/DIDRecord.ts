@@ -40,14 +40,12 @@ export namespace DIDRecordTypes {
   export type DIDOwnerChangedEvent = ContractEvent<{
     identity: Address;
     owner: Address;
-    previousChange: bigint;
   }>;
   export type DIDAttributeChangedEvent = ContractEvent<{
     identity: Address;
     name: bigint;
     value: HexString;
     validTo: bigint;
-    previousChange: bigint;
   }>;
 
   export interface CallMethodTable {
@@ -120,7 +118,7 @@ export const DIDRecord = new Factory(
   Contract.fromJson(
     DIDRecordContractJson,
     "",
-    "e8a430a6dac34b3be9acf254f3ce4359e85b7f1f94e0afd984272151d6af1591"
+    "4661e0f51d42cb8b1fe54c0190d02eea19ce94505abf101d105823c780b38235"
   )
 );
 

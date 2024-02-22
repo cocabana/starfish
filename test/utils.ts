@@ -18,3 +18,9 @@ export function u256ToString(input: BigInt): string {
   const buff: Buffer =  Buffer.from(input.toString(16), 'hex');
   return buff.toString('utf8').replace(/\0+$/, '')
 }
+
+export async function printEvents(txId: string) {
+  const node = web3.getCurrentNodeProvider();
+  const events = await node.events.getEventsTxIdTxid(txId);
+  events.events.forEach(e => console.log('Event', e));
+}

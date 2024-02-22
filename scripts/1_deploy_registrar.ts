@@ -11,10 +11,11 @@ const deploy: DeployFunction = async (deployer: Deployer): Promise<void> => {
   });
 
   console.log("Deployed 'Registrar' with initial state");
-  console.table(initialFields);
   console.log(`Contract id: ${result.contractInstance.contractId}`);
   console.log(`Contract address: ${result.contractInstance.address}`);
   console.log(`Contract group: ${result.contractInstance.groupIndex}`);
+  console.table(initialFields);
+
 };
 
 export default deploy;
