@@ -33,7 +33,7 @@ docker-compose down
 
 ### compile and deploy smart contracts
 ```bash
-yarn compile
+yarn install
 yarn deploy
 ```
 

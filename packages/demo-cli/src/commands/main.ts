@@ -29,10 +29,10 @@ async function buildProfilePrompt() {
   if(final === 'p') {
     const cid = await pushContentToIpfs();
     console.log(`Profile card published to IPFS with CID: ${cid}`);
-    const register = await input({ message: 'Would you like to register this CID to your DID? (Y/n)', validate: (value) =>  value === '' || value.toLowerCase() === 'y' || value.toLowerCase() === 'n' || 'Please enter y or n' });
+    const register = await input({ message: 'Would you like to register this CID to your account? (Y/n)', validate: (value) =>  value === '' || value.toLowerCase() === 'y' || value.toLowerCase() === 'n' || 'Please enter y or n' });
     if(register === '' || register.toLowerCase() === 'y') {
       await setAttributeDid(cid);
-      console.log(`CID ${cid} registered to DID ${starfishAPi.getDIDAccount().address}`);
+      console.log(`CID ${cid} registered to ${starfishAPi.getDIDAccount().address}`);
     }
   }
   else if(final === 'e') {
@@ -72,14 +72,9 @@ async function mainPromptLoop() {
   }
 }
 
-/*
-Select a demo account
-*/
-
 export async function mainPrompt() {
   const answer = await demoAccountPrompt();
   await selectDidByAddress(answer);
   await mainPromptLoop();
 }
 
-//QmPJWCYDpwQQiTXSudierKUeEgPBd4T8vVNkti2epu8Nov
