@@ -2,7 +2,7 @@
 import {ONE_ALPH, stringToHex, web3} from "@alephium/web3";
 import {stringToU256} from "./utils";
 import {starfishAPi, walletApi} from "./";
-import {Register, SetAttribute} from "../ts";
+import {DIDRecord, Register, SetAttribute} from "../ts";
 
 class StarfishWrite {
 
@@ -10,13 +10,11 @@ class StarfishWrite {
 
     if (await starfishAPi.hasContractAccount(starfishAPi.resolveSubContractAddress(identity)))
     {
-      console.log('Contract account already exists');
+      //console.log('Contract account already exists');
       return;
     }
 
-    console.log('Create new record subcontract account for', identity);
-
-    const result = await Register.execute(walletApi.getSignerByAddress(identity), {
+    await Register.execute(walletApi.getSignerByAddress(identity), {
       initialFields: {
         registrar: starfishAPi.getDidRegistrarContractId(),
         identity
@@ -24,12 +22,13 @@ class StarfishWrite {
       attoAlphAmount: ONE_ALPH
     });
 
-    console.log(`Register txid: ${result.txId}`);
+    console.log('Created new subcontract account for', identity);
 
-    const contractEvents = await web3.getCurrentNodeProvider().events.getEventsTxIdTxid(result.txId);
+    //console.log(`Register txid: ${result.txId}`);
 
-    contractEvents.events.forEach(e => console.log('Event', e));
-
+    // const contractEvents = await web3.getCurrentNodeProvider().events.getEventsTxIdTxid(result.txId);
+    //
+    // contractEvents.events.find(e => console.log('Event', e));
   }
 
   async setContractAttribute(identity: string, name: string, value: string) {
@@ -42,11 +41,17 @@ class StarfishWrite {
         value: stringToHex(value)
       }
     });
-    console.log(`SetAttribute txid: ${result.txId}`);
+    // console.log(`SetAttribute txid: ${result.txId}`);
 
     const contractEvents = await web3.getCurrentNodeProvider().events.getEventsTxIdTxid(result.txId);
+    const event = contractEvents.events.find(e => e.eventIndex === DIDRecord.eventIndex.DIDAttributeChanged);
 
-    contractEvents.events.forEach(e => console.log('Event', e));
+    if (event) {
+      console.log('Success');
+    }
+    else {
+      throw new Error('Failed to update contract state');
+    }
   }
 }
 

@@ -6,9 +6,10 @@ import child_process from "child_process";
 import {starfishAPi} from "@starfish/artifacts";
 import {pinService} from "../cards/pinService.js";
 
+let lastResult: string = null;
+
 export async function generateCard({name, title}: ProfileOptions) {
-  console.log('name:', name, 'title:', title);
-  const {did} = await starfishAPi.getDIDAccount();
+  const {did} = starfishAPi.getDIDAccount();
   const htmlObj = cardService.renderCard({
     name,
     did,
@@ -20,11 +21,19 @@ export async function generateCard({name, title}: ProfileOptions) {
 
   fs.writeFileSync(resolve('./test.html'), htmlObj.html);
 
-  const ipfsContent = Buffer.from(JSON.stringify(htmlObj.widget)).toString('base64');
+  lastResult = Buffer.from(JSON.stringify(htmlObj.widget)).toString('base64');
 
-  // fs.writeFileSync(resolve('./widget.txt'), ipfsContent);
+  // console.log('Preview here: file:///'+resolve('./test.html'))
+  // console.log('launching preview... file:///'+resolve('./test.html'));
 
-  await pinService.pinContentToIPFS(ipfsContent);
+}
 
+export async function pushContentToIpfs() {
+  return pinService.pinContentToIPFS(lastResult);
+}
+
+export async function previewCard() {
   child_process.spawn('open', [resolve('./test.html')]);
 }
+
+//file:///Users/ffox/Projects/Cocabana/starfish/packages/demo-cli/test.html

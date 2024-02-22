@@ -4,6 +4,8 @@ import {useEffect, useState} from "react";
 import { IconExclamationCircle } from '@tabler/icons-react';
 import {starfishAPi} from "@starfish/artifacts";
 import {useProfileCard} from "./useProfileCard.ts";
+import accounts from './accounts.json';
+
 
 type IdAccount = {
   address: string;
@@ -26,15 +28,9 @@ function App() {
   const [submitError, setSubmitError] = useState('')
   const [profileCard, setProfileCard] = useState<ProfileCard>()
   const [account, setAccount] = useState<IdAccount>(undefined)
-  const [accountAddresses, setAccountAccounts] = useState<string[]>([])
+  const [accountAddresses, setAccountAccounts] = useState<string[]>(accounts)
 
   const { fetchProfileCard } = useProfileCard();
-
-  useEffect(() => {
-    starfishAPi.getDemoAccounts().then((result) => {
-      setAccountAccounts(result);
-    })
-  }, []);
 
   const handleInputChanged = async (value: string) => {
     const safeAddress = value.trim();

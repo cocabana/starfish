@@ -38,12 +38,17 @@ class PinService {
       body: JSON.stringify(body)
     };
 
-    fetch('https://api.pinata.cloud/pinning/pinJSONToIPFS', options)
-    .then(response => response.json())
-    .then(response => console.log(response))
-    .catch(err => console.error(err));
+    return fetch('https://api.pinata.cloud/pinning/pinJSONToIPFS', options)
+    .then(response => response.json() as Promise<PinataResponse>)
+    .then(response => response.IpfsHash);
 
   }
+}
+
+type PinataResponse = {
+  IpfsHash: string;
+  PinSize: number;
+  Timestamp: string;
 }
 
 export const pinService = new PinService();

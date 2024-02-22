@@ -1,5 +1,5 @@
 {
-  "testPathIgnorePatterns": [".*/node_modules/", ".*/packages/"],
+  "testPathIgnorePatterns": [".*/node_modules/", ".*/packages/", ".*/bak/"],
   "transform": {
     "^.+\\.(t|j)sx?$": "ts-jest"
   },

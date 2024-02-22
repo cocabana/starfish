@@ -7,8 +7,8 @@ import {demoAccounts} from "./demoAccounts";
 
 class StarfishAPi {
 
-  deployments: Deployments;
-  private selectedDidIndex: number = 0;
+  private deployments: Deployments;
+  private selectedDidAccount: string;
 
   constructor() {
     setNodeProviderUrl('http://127.0.0.1:22973');
@@ -33,7 +33,7 @@ class StarfishAPi {
     return this.deployments;
   }
 
-  async getDemoAccounts() {
+  getDemoAccounts() {
     return demoAccounts.getAccounts();
   }
 
@@ -42,20 +42,21 @@ class StarfishAPi {
     return b.balanceHint;
   }
 
-  async selectDidAccount(i: number) {
-    const len = demoAccounts.getAccounts().length;
-    if (i < 0 || i >= len) {
-      throw new Error('Invalid index! Must be a value between 1 and ' + len + ' inclusively.');
+  async selectDidAccount(address: string) {
+    const demoAccount = demoAccounts.getAccounts().find(a => a === address);
+    if (!demoAccount) {
+      throw new Error(`Address ${address} is not a demo account`);
     }
-    this.selectedDidIndex = i;
-    return this.getDIDAccount();
+    this.selectedDidAccount = demoAccount;
   }
 
-  async getDIDAccount() {
-    const address = demoAccounts.getAccounts()[this.selectedDidIndex];
+  getDIDAccount() {
+    if (!this.selectedDidAccount) {
+      throw new Error('No selected account');
+    }
     return {
-      did: `did:alph:${address}`,
-      address
+      did: `did:alph:${this.selectedDidAccount}`,
+      address: this.selectedDidAccount,
     };
   }
 
@@ -68,7 +69,7 @@ class StarfishAPi {
   }
 
   async getContractState(address: string) {
-    console.log('getContractState', address);
+    // console.log('getContractState', address);
     return await DIDRecord.at(address).fetchState().catch(e => undefined);
   }
 

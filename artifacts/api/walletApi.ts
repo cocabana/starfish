@@ -1,8 +1,12 @@
 import {PrivateKeyWallet} from "@alephium/web3-wallet";
 import {demoAccounts} from "./demoAccounts";
-import {testAddress, testPrivateKey} from "@alephium/web3-test";
-import {ONE_ALPH, web3} from "@alephium/web3";
+import {getSigners} from "@alephium/web3-test";
+import {web3} from "@alephium/web3";
 import {getNodeProviderUrl} from "./utils";
+import {LocalStorage} from 'node-localstorage';
+import fs from "fs";
+import {resolve} from "path";
+
 
 ///http://127.0.0.1:22973/addresses/1iaRFCwwYK8XAixrtq56w7PwkVrCR6Bo16nW9LQYaqkA/balance
 //https://backend.mainnet.alephium.org/infos
@@ -12,43 +16,70 @@ class WalletApi {
   private signers: PrivateKeyWallet[] = [];
 
   public async prepareAccounts(keys?: string[]) {
+
+    const nodeProvider = web3.getCurrentNodeProvider();
+
     if (keys && keys.length > 0) {
-      this.signers = keys.map(k => new PrivateKeyWallet({privateKey: k}));
+      this.signers = keys.map(k => new PrivateKeyWallet({privateKey: k, nodeProvider}));
       demoAccounts.setAccounts(this.signers.map(s => s.address));
+      await this.syncAccountsToWebsiteProject();
       return;
     }
 
-    const nodeProvider = web3.getCurrentNodeProvider();
+    const localStorage = new LocalStorage('./scratch');
+
+    const keyItem = localStorage.getItem('alephiumDemoAccounts');
+    if (keyItem) {
+      const keys = keyItem.split(',');
+      this.signers = keys.map(k => new PrivateKeyWallet({privateKey: k, nodeProvider}));
+      demoAccounts.setAccounts(this.signers.map(s => s.address));
+    }
+
+
     const accounts = demoAccounts.getAccounts();
     const demoBalance = await nodeProvider.addresses.getAddressesAddressBalance(accounts[0]);
 
     if (demoBalance.balance !== '0') {
       console.log('Demo accounts have already been funded')
+      await this.syncAccountsToWebsiteProject();
       return;
     }
 
     if (getNodeProviderUrl().startsWith('http://127.0.0.1')) {
-      const rootWallet = new PrivateKeyWallet({ privateKey: testPrivateKey, nodeProvider })
-      const alphAmount = ONE_ALPH * 100n
-      const balances = await nodeProvider.addresses.getAddressesAddressBalance(testAddress)
-      const availableBalance = BigInt(balances.balance) - BigInt(balances.lockedBalance)
+      //TODO - create 4 new random accounts and save keys to localstorage
+      this.signers = await getSigners(4);
+      demoAccounts.setAccounts(this.signers.map(s => s.address));
+      localStorage.setItem('alephiumDemoAccounts', this.signers.map(s => s.privateKey).join(','));
+      await this.syncAccountsToWebsiteProject();
 
-      if (availableBalance < alphAmount) {
-        throw new Error('Not enough balance, please restart the devnet')
-      }
-
-      for(let i = 0; i < accounts.length; i++) {
-        const address = accounts[i];
-        console.log('Funding', address);
-        const destinations = [{ address, attoAlphAmount: alphAmount }]
-        await rootWallet.signAndSubmitTransferTx({ signerAddress: testAddress, destinations })
-      }
-
-      console.log('Demo accounts have been funded')
+      console.log('Create and funded 4 new random accounts')
     }
     else {
       throw new Error('No keys provided and no local node to generate keys')
     }
+  }
+
+  async syncAccountsToWebsiteProject() {
+    let dirname: string;
+    try {
+      //CommonJS
+      dirname = __dirname;
+    }
+    catch (e) {
+      //ESM
+
+      // @ts-ignore
+      const path = await import('node:path');
+      // @ts-ignore
+      const {fileURLToPath} = await import('node:url');
+      // @ts-ignore
+      const filename = fileURLToPath(import.meta.url);
+
+      dirname = path.dirname(filename);
+    }
+    const targetFile = resolve(dirname, '../../../../packages/demo-website/src/accounts.json');
+    //console.log('syncWebsiteAccounts', dirname, targetFile);
+    fs.writeFileSync(targetFile, JSON.stringify(demoAccounts.getAccounts(), null, 2));
   }
 
   getSignerByAddress(address: string) {

@@ -1,5 +1,5 @@
 {
-  "version": "v2.8.3",
+  "version": "v2.8.5",
   "name": "Register",
   "bytecodeTemplate": "01010300000008b413c40de0b6b3a7640000a2{1}0d0c{0}0102",
   "fieldsSig": {

@@ -1,10 +1,6 @@
 import './appenv.js'
 import {Command} from "commander";
-import {generateCard} from "./commands/generateCard.js";
-import {selectDid} from "./commands/selectDid.js";
-import {setAttributeDid} from "./commands/setAttributeDid.js";
-import {issueRoleCredential} from "./commands/issueRoleCredential.js";
-import {walletApi} from "@starfish/artifacts";
+import {mainPrompt} from "./commands/main.js";
 
 const program = new Command();
 program
@@ -13,6 +9,7 @@ program
 .version("0.0.1")
 .exitOverride(() => process.exit(0));
 
+/*
 program
 .command("did.select")
 .description("Select DID account by index to use with the other commands")
@@ -37,7 +34,10 @@ program
 .description("Issue a role credential")
 .requiredOption("-a, --address <name>", "address")
 .requiredOption("-r, --role <title>", "member role")
-.action(issueRoleCredential);
+.action(issueRoleCredential);*/
+
+program
+.action(mainPrompt);
 
 // this parses the process.argv array
 program.parse();
