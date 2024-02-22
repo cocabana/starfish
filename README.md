@@ -15,12 +15,7 @@ A DID registry smart contract is used to manage and present identities in Web3.
     • Publish profile card (push to IPFS, set attribute in smart contract)
 
 
-sudo -i curl -L https://github.com/docker/compose/releases/download/2.24.6/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
 
-$ chmod +x /usr/local/bin/docker-compose
-sudo curl -L "https://github.com/docker/compose/releases/download/v2.24.6/docker-compose-$(uname -s)-$(uname -m)"  -o /usr/local/bin/docker-compose
-sudo mv /usr/local/bin/docker-compose /usr/bin/docker-compose
-sudo chmod +x /usr/bin/docker-compose
 
 ## Setup Environment
 
