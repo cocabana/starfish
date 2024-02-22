@@ -1,1 +1,0 @@
-{"version":3,"file":"walletApi.d.ts","sourceRoot":"","sources":["../../../api/walletApi.ts"],"names":[],"mappings":"AAAA,OAAO,EAAC,gBAAgB,EAAC,MAAM,uBAAuB,CAAC;AAavD,cAAM,SAAS;IAEb,OAAO,CAAC,OAAO,CAA0B;IAE5B,eAAe,CAAC,IAAI,CAAC,EAAE,MAAM,EAAE;IA4CtC,4BAA4B;IAuBlC,kBAAkB,CAAC,OAAO,EAAE,MAAM;CAInC;AAED,eAAO,MAAM,SAAS,WAAkB,CAAC"}

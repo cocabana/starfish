@@ -33,6 +33,11 @@ docker-compose up -d
 yarn deploy
 ```
 
+### Build smart contract artifacts for use in DAPPS
+```bash
+yarn workspace @starfish/artifacts build
+```
+
 ## Run demo
 ### Demo-CLI
 Command line prompts for blockchain interaction
