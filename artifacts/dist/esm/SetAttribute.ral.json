@@ -1,0 +1,40 @@
+{
+    "version": "v2.8.5",
+    "name": "SetAttribute",
+    "bytecodeTemplate": "01010300000008{1}{2}{3}{4}100c{0}0103",
+    "fieldsSig": {
+        "names": [
+            "registrar",
+            "identity",
+            "name",
+            "value",
+            "validity"
+        ],
+        "types": [
+            "ByteVec",
+            "Address",
+            "U256",
+            "ByteVec",
+            "U256"
+        ],
+        "isMutable": [
+            false,
+            false,
+            false,
+            false,
+            false
+        ]
+    },
+    "functions": [
+        {
+            "name": "main",
+            "usePreapprovedAssets": true,
+            "useAssetsInContract": false,
+            "isPublic": true,
+            "paramNames": [],
+            "paramTypes": [],
+            "paramIsMutable": [],
+            "returnTypes": []
+        }
+    ]
+}

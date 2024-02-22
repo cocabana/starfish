@@ -1,0 +1,1 @@
+{"version":3,"file":"starfishWrite.d.ts","sourceRoot":"","sources":["../../../api/starfishWrite.ts"],"names":[],"mappings":"AAMA,cAAM,aAAa;IAEX,qBAAqB,CAAC,QAAQ,EAAE,MAAM;IAyBtC,oBAAoB,CAAC,QAAQ,EAAE,MAAM,EAAE,IAAI,EAAE,MAAM,EAAE,KAAK,EAAE,MAAM;CAsBzE;AAED,eAAO,MAAM,aAAa,eAAsB,CAAC"}
