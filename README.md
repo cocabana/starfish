@@ -15,35 +15,42 @@ A DID registry smart contract is used to manage and present identities in Web3.
     • Publish profile card (push to IPFS, set attribute in smart contract)
 
 
-
-
 ## Setup Environment
 
-### start docker
+### Install dependencies
+```bash
+yarn install
+```
+
+### Start docker
 ```bash
 cd docker
 docker-compose up -d
 ```
 
+### Deploy smart contracts
+```bash
+yarn deploy
+```
+
+## Run demo
+### Demo-CLI
+Command line prompts for blockchain interaction
+```bash
+cd packages/demo-cli
+yarn start
+```
+
+### Demo-Website
+
+```bash
+cd packages/demo-website
+yarn dev
+```
+
+## Cleanup Envioronment
 ### shutdown docker
 ```bash
 cd docker
 docker-compose down
-```
-
-### compile and deploy smart contracts
-```bash
-yarn install
-yarn deploy
-```
-
-### run smart contract tests
-```bash
-yarn test
-```
-
-## Dapp for blockchain interaction
-```bash
-cd packages/starfish-cli
-yarn start
 ```
