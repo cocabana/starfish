@@ -1,5 +1,6 @@
+
 import {addressFromContractId, hexToString, subContractId, web3} from "@alephium/web3";
-import {addressToByteVec, u256ToString} from "./utils.js";
+import {addressToByteVec, getNodeProviderUrl, setNodeProviderUrl, u256ToString} from "./utils.js";
 import {DIDRecord, loadDeployments} from "../"
 import {Deployments} from "../ts/deployments";
 import {demoAccounts} from "./demoAccounts";
@@ -10,23 +11,30 @@ class StarfishAPi {
   private selectedDidIndex: number = 0;
 
   constructor() {
-    web3.setCurrentNodeProvider('http://127.0.0.1:22973');
-  }
-
-
-  setCurrentNodeProvider(url: string) {
-    web3.setCurrentNodeProvider(url);
+    setNodeProviderUrl('http://127.0.0.1:22973');
   }
 
   get deploys() {
     if (!this.deployments) {
-      this.deployments = loadDeployments("devnet");
+      const url = getNodeProviderUrl();
+      if (url.startsWith('http://127.0.0.1')) {
+        this.deployments = loadDeployments("devnet");
+      }
+      else if(url.includes('testnet')) {
+        this.deployments = loadDeployments("testnet");
+      }
+      else if (url.includes('mainnet')) {
+        this.deployments = loadDeployments("mainnet");
+      }
+      else {
+        throw new Error('Unknown network');
+      }
     }
     return this.deployments;
   }
 
   async getDemoAccounts() {
-    return demoAccounts.map(s => s.address);
+    return demoAccounts.getAccounts();
   }
 
   async getAccountBalance(address: string) {
@@ -35,15 +43,16 @@ class StarfishAPi {
   }
 
   async selectDidAccount(i: number) {
-    if (i < 0 || i >= demoAccounts.length) {
-      throw new Error('Invalid index! Must be a value between 1 and ' + demoAccounts.length + ' inclusively.');
+    const len = demoAccounts.getAccounts().length;
+    if (i < 0 || i >= len) {
+      throw new Error('Invalid index! Must be a value between 1 and ' + len + ' inclusively.');
     }
     this.selectedDidIndex = i;
     return this.getDIDAccount();
   }
 
   async getDIDAccount() {
-    const address = demoAccounts[this.selectedDidIndex].address;
+    const address = demoAccounts.getAccounts()[this.selectedDidIndex];
     return {
       did: `did:alph:${address}`,
       address

@@ -1,4 +1,6 @@
-import {binToHex, bs58, Project, web3} from "@alephium/web3";
+import {binToHex, bs58, web3} from "@alephium/web3";
+
+let nodeProviderUrl = '';
 
 export function stringToU256(str: string) {
   const buffStr = '0x' + Buffer.from(str).slice(0, 32).toString('hex')
@@ -24,4 +26,13 @@ export async function printEvents(txId: string) {
 
 export function addressToByteVec(address: string) {
   return binToHex(bs58.decode(address));
+}
+
+export function setNodeProviderUrl(url: string) {
+  nodeProviderUrl = url;
+  web3.setCurrentNodeProvider(url);
+}
+
+export function getNodeProviderUrl() {
+  return nodeProviderUrl;
 }

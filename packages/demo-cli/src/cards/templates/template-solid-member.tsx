@@ -9,7 +9,7 @@ const templateSolidMember = (
 
   let bgStyle = {};
 
-  badges = [{label: "Admin"},{label: "Builder"},{label: "DAO"}]
+  //badges = [{label: "Admin"},{label: "Builder"},{label: "DAO"}]
 
   avatar = 'https://starfish-f3983.web.app/assets/images/minion1.png';
 
@@ -67,7 +67,7 @@ const templateSolidMember = (
             </div>
           </div>
 
-            <div className="flex items-center justify-between mt-[24px] mx-[26px]">
+            <div className="flex items-start justify-between mt-[24px] mx-[26px]">
               <div className="flex flex-col gap-1">
                 <div className="font-bold text-[22px]">{name}</div>
                 <div className="text-[18px]">{titleStr}</div>

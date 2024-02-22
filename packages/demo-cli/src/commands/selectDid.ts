@@ -4,6 +4,9 @@ import {starfishAPi, starfishWrite} from "@starfish/artifacts";
 export async function selectDid({index}: {index: number}) {
   const {address} = await starfishAPi.selectDidAccount(index - 1);
   const balance = await starfishAPi.getAccountBalance(address);
-  console.log('Balance', balance);
+  if (balance === '0 ALPH') {
+    throw new Error('Account has no balance - ' + address);
+  }
+  console.log('Balance', address, balance);
   await starfishWrite.createContractAccount(address);
 }

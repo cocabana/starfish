@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "postinstall": "patch-package --exclude 'nothing'",
-    "tsx": "npx tsx src/test.ts",
+    "test": "npx tsx src/test.ts",
     "cli": "npx tsx src/index.ts",
     "css": "tailwindcss -i src/cards/global.css -o ./src/cards/assets/css/output.css",
     "cssp": "tailwindcss -i src/cards/global.css -o ./src/cards/assets/css/output.css --minify",

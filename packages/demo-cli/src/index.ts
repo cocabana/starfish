@@ -39,7 +39,5 @@ program
 .requiredOption("-r, --role <title>", "member role")
 .action(issueRoleCredential);
 
-await walletApi.initialize();
-
 // this parses the process.argv array
 program.parse();
