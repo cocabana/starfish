@@ -4,6 +4,10 @@ const baseUrl = 'https://coffee-accused-boa-592.mypinata.cloud/ipfs';
 
 export const useProfileCard = () => {
 
+  const getDemoAccounts = () => {
+    return starfishAPi.getDemoAccounts();
+  }
+
   const fetchContent = async (hash: string) => {
     const res = await fetch(`${baseUrl}/${hash}`);
     const encodedContent = await res.json();
@@ -42,6 +46,7 @@ export const useProfileCard = () => {
 
 
   return {
+    getDemoAccounts,
     fetchProfileCard
   }
 }

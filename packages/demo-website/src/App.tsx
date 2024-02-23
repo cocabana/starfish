@@ -2,7 +2,7 @@
 import {Avatar, Button, Chip, Container, Group, rem, Text, TextInput, Title} from "@mantine/core";
 import {useEffect, useState} from "react";
 import { IconExclamationCircle } from '@tabler/icons-react';
-import {starfishAPi} from "@starfish/artifacts";
+import {setNodeProviderUrl, starfishAPi} from "@starfish/artifacts";
 import {useProfileCard} from "./useProfileCard.ts";
 import accounts from './accounts.json';
 
@@ -19,17 +19,31 @@ type ProfileCard = {
   height: number;
 }
 
+const nodeUrl = import.meta.env.VITE_NODE_PROVIDER_URL;
+
+if (nodeUrl) {
+  setNodeProviderUrl(nodeUrl);
+}
+
 function App() {
 
   const [address, setAddress] = useState('');
   const [preselect, setPreSelect] = useState('');
+  const [network, setNetwork] = useState('devnet');
   const [pending, setPending] = useState(false)
   const [submitError, setSubmitError] = useState('')
   const [profileCard, setProfileCard] = useState<ProfileCard>()
   const [account, setAccount] = useState<IdAccount>(undefined)
-  const [accountAddresses, setAccountAccounts] = useState<string[]>(accounts)
+  const [accountAddresses, setAccountAddresses] = useState<string[]>(accounts)
 
-  const { fetchProfileCard } = useProfileCard();
+  const { fetchProfileCard, getDemoAccounts } = useProfileCard();
+
+  useEffect(() => {
+    if (nodeUrl.includes('mainnet')) {
+      setAccountAddresses(getDemoAccounts());
+      setNetwork('mainnet');
+    }
+  }, []);
 
   const handleInputChanged = async (value: string) => {
     const safeAddress = value.trim();
@@ -81,7 +95,7 @@ function App() {
   return (
     <>
 
-      <div className="flex gap-20 items-center m-8 relative">
+      <div className="flex gap-20 items-center m-8 relative justify-between">
         <Group>
           <Avatar src="/assets/images/beach-island.jpg" size={78} radius="xl" />
           <div>
@@ -90,6 +104,7 @@ function App() {
           </div>
         </Group>
         <Text size="xl" c="dimmed">Cocabana Starfish Identity demo</Text>
+        <Text size="lg" tt="lowercase" c={"rgb(247,140,20,0.7)"}>[ {network} ]</Text>
       </div>
       <div className="mt-20 flex flex-col items-center">
         <div>
