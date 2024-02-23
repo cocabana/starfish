@@ -1,18 +1,26 @@
-# starfish
+# Starfish
 
 Starfish is a Alephium Hackathon Project.
 
 A DID registry smart contract is used to manage and present identities in Web3.
 
+Tech Stack (top down)
+- React.js Webpage (Dapp)
+- Node.js CLI (Dapp)
+- HTML templates for Profile Cards
+- Ralph Smart Contracts
+- Alephium Blockchain
+
 ## Objectives
-	• Port ethr-did-registry to Ralph.
-	• Create a CLI for blockchain interaction
-	• Register identity owner
-	• Lookup identity owner
-	• Setting attribute (IPFS link to web3 profile card)
-	• Lookup attribute
-	• Design Web3 profile card template (name, title/role, picture)
+    • Use ethr-did-registry as inpiration and port what we need to Ralph.
+    • Create a CLI for blockchain interaction
+    • Register identity owner
+    • Lookup identity owner
+    • Setting attribute (IPFS link to web3 profile card)
+    • Lookup attribute
+    • Design Web3 profile card template (name, title/role, picture)
     • Publish profile card (push to IPFS, set attribute in smart contract)
+    • Create a Website to lookup profiles for a given address
 
 
 ## Setup Environment
@@ -33,7 +41,7 @@ docker-compose up -d
 yarn deploy
 ```
 
-### Build smart contract artifacts for use in DAPPS
+### Build smart contract artifacts for use in Dapps
 ```bash
 yarn workspace @starfish/artifacts build
 ```
@@ -53,7 +61,7 @@ cd packages/demo-website
 yarn dev
 ```
 
-## Cleanup Envioronment
+## Cleanup Environment
 ### shutdown docker
 ```bash
 cd docker

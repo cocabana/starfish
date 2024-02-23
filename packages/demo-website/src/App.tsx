@@ -22,7 +22,6 @@ type ProfileCard = {
 function App() {
 
   const [address, setAddress] = useState('');
-  //const [balance, setBalance] = useState('');
   const [preselect, setPreSelect] = useState('');
   const [pending, setPending] = useState(false)
   const [submitError, setSubmitError] = useState('')
@@ -66,13 +65,15 @@ function App() {
             console.error('Error', error);
             setProfileCard(undefined);
           })
+          .finally(() => setPending(false));
 
       })
       .catch((error) => {
         console.error('Error', error);
         setSubmitError('Invalid address');
+        setPending(false)
       })
-      .finally(() => setPending(false));
+
     }
   }
 
@@ -94,7 +95,7 @@ function App() {
         <div>
           <Group gap={4}>
           <Chip.Group multiple={false} value={preselect} onChange={handlePreSelect} >
-            {accountAddresses.map((a,i) => <Chip value={a} variant="outline" key={i}>{`account #${i+1}`}</Chip>)}
+            {accountAddresses.map((a,i) => <Chip value={a} color={"rgb(247,140,20)"} variant="outline" key={i}>{`account #${i+1}`}</Chip>)}
           </Chip.Group>
           </Group>
           <Group className="mt-4" align="top">
@@ -113,7 +114,7 @@ function App() {
                  }
             />
             <div className="mr-8">
-              <Button variant="filled" color="blue" loading={pending} disabled={!address} loaderProps={{ type: 'oval' }} onClick={handleSubmit}>Submit</Button>
+              <Button variant="filled" color={"rgb(247,140,20)"} loading={pending} disabled={!address} loaderProps={{ type: 'oval' }} onClick={handleSubmit}>Submit</Button>
             </div>
           </Group>
         </div>
@@ -127,11 +128,12 @@ function App() {
               </div>
               <Text size="sm" fw={600} c={"rgb(247,140,20)"}>{account.address}</Text>
             </div>
-            <Container p="sm" className="mt-4 rounded-xl w-[650px] h-[450px] flex justify-center items-center">
+            <Container className="rounded-xl w-[650px] h-[450px] flex justify-center items-center">
 
-              {!profileCard && <Text>No profile found</Text>}
-              {profileCard && !profileCard.stylesheet && <Text>{profileCard.body}</Text>}
-              {profileCard && profileCard.stylesheet && (
+              { pending && (<Button variant="outline" mt={4} loading={true} loaderProps={{ type: 'dots' }} color={"rgb(247,140,20)"}>... ...</Button>)}
+              {!pending && !profileCard && <Text>No profile found</Text>}
+              {!pending && profileCard && !profileCard.stylesheet && <Text>{profileCard.body}</Text>}
+              {!pending && profileCard && profileCard.stylesheet && (
                 <div className='flex gap-16 flex-wrap items-center'>
                   <style dangerouslySetInnerHTML={{__html: profileCard.stylesheet}}/>
                   <div dangerouslySetInnerHTML={{__html: profileCard.body}} style={{ width: profileCard.width, height: profileCard.height }}/>

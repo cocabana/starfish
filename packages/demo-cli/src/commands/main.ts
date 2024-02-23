@@ -28,8 +28,8 @@ async function buildProfilePrompt() {
   const final = await input({ message: 'Would you like to (p)ublish, (e)dit or e(x)it? ', validate: (value) => value === 'p' || value === 'e' || value === 'x' || 'Please enter p, e or x' });
   if(final === 'p') {
     const cid = await pushContentToIpfs();
-    console.log(`Profile card published to IPFS with CID: ${cid}`);
-    const register = await input({ message: 'Would you like to register this CID to your account? (Y/n)', validate: (value) =>  value === '' || value.toLowerCase() === 'y' || value.toLowerCase() === 'n' || 'Please enter y or n' });
+    console.log(`Profile card has been published to IPFS with CID: ${cid}`);
+    const register = await input({ message: 'Would you like to register this CID to your DID? (Y/n)', validate: (value) =>  value === '' || value.toLowerCase() === 'y' || value.toLowerCase() === 'n' || 'Please enter y or n' });
     if(register === '' || register.toLowerCase() === 'y') {
       await setAttributeDid(cid);
       console.log(`CID ${cid} registered to ${starfishAPi.getDIDAccount().address}`);
@@ -46,11 +46,6 @@ async function mainPromptLoop() {
       message: 'Select a command',
       choices: [
         {name: 'Build profile', value: 'generate', description: `Generate a new profile card for ${starfishAPi.getDIDAccount().address}`},
-        // {
-        //   name: 'Register profile ',
-        //   value: 'register',
-        //   description: `Register the DID Linked Resource value (IPFS CID) to ${starfishAPi.getDIDAccount().address} `
-        // },
         {name: 'Change account', value: 'changeAccount', description: 'Select a different account'},
         {name: 'Exit', value: 'exit', description: 'Exit the program'},
       ]
