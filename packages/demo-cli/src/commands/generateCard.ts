@@ -1,27 +1,31 @@
-import {ProfileOptions} from "../cards/types.js";
+import {BadgeOptions, ProfileOptions} from "../cards/types.js";
 import {cardService} from "../cards/cardService.js";
 import fs from "fs";
 import {resolve} from "path";
 import child_process from "child_process";
-import {starfishAPi} from "@starfish/artifacts";
+import {starfishAPi, walletApi} from "@starfish/artifacts";
 import {pinService} from "../cards/pinService.js";
+import {credentialBuilder} from "@starfish/artifacts/api/credentialBuilder.js";
 
-let lastResult: string = null;
+let lastResult: { content:string, badges: BadgeOptions[] };
 
-export async function generateCard({name, title}: ProfileOptions) {
+export async function generateCard(address:string, {name, title, badges}: ProfileOptions) {
   const {did} = starfishAPi.getDIDAccount();
   const htmlObj = cardService.renderCard({
     name,
     did,
     timestamp: Date.now(),
-    qrCodeLink: 'Hello',
+    qrCodeLink: `https://starfish-f3983.web.app/${address}`,
     title,
+    badges,
     avatar: 'https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-1.png'
   }, {width: 420, height: 420})
 
   fs.writeFileSync(resolve('./test.html'), htmlObj.html);
 
-  lastResult = Buffer.from(JSON.stringify(htmlObj.widget)).toString('base64');
+  const content = Buffer.from(JSON.stringify(htmlObj.widget)).toString('base64');
+
+  lastResult = {content, badges};
 
   // console.log('Preview here: file:///'+resolve('./test.html'))
   // console.log('launching preview... file:///'+resolve('./test.html'));
@@ -29,7 +33,18 @@ export async function generateCard({name, title}: ProfileOptions) {
 }
 
 export async function pushContentToIpfs() {
-  return pinService.pinContentToIPFS(lastResult);
+  const {address} = starfishAPi.getDIDAccount();
+  const resource = {
+    version: '0.0.1',
+    content: lastResult.content,
+  } as any;
+
+  if (lastResult.badges) {
+    const pAll = lastResult.badges.map(b => walletApi.generateCredential(address, { badge: b }));
+    resource.credentials = await Promise.all(pAll);
+  }
+  console.log(resource);
+  return pinService.pinContentToIPFS(resource);
 }
 
 export async function previewCard() {

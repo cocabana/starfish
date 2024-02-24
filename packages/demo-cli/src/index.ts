@@ -1,6 +1,6 @@
 import './appenv.js'
 import {Command} from "commander";
-import {mainPrompt} from "./commands/main.js";
+import {mainPrompt} from "./main.js";
 
 const program = new Command();
 program

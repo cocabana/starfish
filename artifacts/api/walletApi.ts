@@ -1,11 +1,12 @@
 import {PrivateKeyWallet} from "@alephium/web3-wallet";
 import {demoAccounts} from "./demoAccounts";
 import {getSigners} from "@alephium/web3-test";
-import {web3} from "@alephium/web3";
+import {web3, hashMessage} from "@alephium/web3";
 import {getNodeProviderUrl} from "./utils";
 import {LocalStorage} from 'node-localstorage';
 import fs from "fs";
 import {resolve} from "path";
+import {credentialBuilder} from "./credentialBuilder";
 
 
 ///http://127.0.0.1:22973/addresses/1iaRFCwwYK8XAixrtq56w7PwkVrCR6Bo16nW9LQYaqkA/balance
@@ -84,6 +85,18 @@ class WalletApi {
 
   getSignerByAddress(address: string) {
     return this.signers.find(s => s.address === address);
+  }
+
+  generateCredential(address: string, subject: any): Promise<string> {
+    const issuerWallet = this.signers[0];
+    const issuer = `did:alph:${issuerWallet.address}`;
+    const receiver = `did:alph:${address}`;
+
+    return credentialBuilder.createVerifiableCredential(issuer, issuerWallet.privateKey, { id: receiver, ...subject}).then(vc => vc.proof.jwt);
+  }
+
+  signCredential(payload: string, address: string) {
+    return this.getSignerByAddress(address).signRaw(address, hashMessage(payload, 'sha256'));
   }
 
 }

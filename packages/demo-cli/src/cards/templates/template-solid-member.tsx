@@ -9,7 +9,7 @@ const templateSolidMember = (
 
   let bgStyle = {};
 
-  //badges = [{label: "Admin"},{label: "Builder"},{label: "DAO"}]
+  // badges = [{label: "Admin"},{label: "Builder"},{label: "DAO"}]
 
   avatar = 'https://starfish-f3983.web.app/assets/images/minion1.png';
 
@@ -40,10 +40,10 @@ const templateSolidMember = (
   const avatarImg = avatar || getImageData('anonymous.png');
   // const logo = getSvgSrc('cabana/card-logo-cabana.svg');
   const logo = getSvgSrc('alph/alph_logo.svg', '#FF5D51');
-  const roleMark = getSvgSrc('cabana/cabana-logo-mark.svg');
+  const roleMark = getSvgSrc('alph/aleph-logo-mark.svg');
   const hasRoles = badges && badges.length;
   const cardHeight = hasRoles ? 260 : 230;
-  const cardStyle = { borderRadius: '10px', backgroundColor: 'white', border: '1px solid #D7D8D9', padding: '4px 8px', gap: '6px', fontSize: '14px' };
+  const cardStyle = { borderRadius: '10px', backgroundColor: 'white', border: '1px solid #D7D8D9', padding: '4px 12px', gap: '6px', fontSize: '14px' };
   // const titleStr = titles && titles.length ? titles.join(' | ') : '';
   const titleStr = title || '';
   const bioStyle: any = { color: 'white', textAlign: 'center', alignItems: 'center', height: hasRoles ? '62px' : '82px' };
@@ -51,14 +51,11 @@ const templateSolidMember = (
   return (
 
       <div className="profile-wrapper text-black flex flex-col w-full h-full pt-[100px] px-[20px] relative" style={{ borderRadius: '12px', ...bgStyle }}>
-        <div className="flex absolute top-[20px] right-[22px]">
-          <img width="24px" src={logo}  />
-        </div>
-        <div className="flex flex-col bg-white rounded-xl w-full relative" style={{height: cardHeight, boxShadow: '0 4px 8px 0px rgb(0 0 0 / 0.2)'}}>
+        <div className="flex flex-col bg-white rounded-xl w-full relative px-[18px]" style={{height: cardHeight, boxShadow: '0 4px 8px 0px rgb(0 0 0 / 0.2)'}}>
           <div className="flex top-[-40px] left-[24px] p-[3px] w-[128px] h-[128px] rounded-full absolute" style={{backgroundColor: accentColor, boxShadow: '0 4px 8px 0px rgb(0 0 0 / 0.2)'}}>
             <img src={avatarImg} className="w-full h-full rounded-full" />
           </div>
-          <div className="flex flex-col self-end mr-[24px] mt-[24px]">
+          <div className="flex flex-col self-end mt-[24px]">
             <div className="flex self-end">
               <img width="157px" height="45px" src={logo}/>
             </div>
@@ -67,7 +64,7 @@ const templateSolidMember = (
             </div>
           </div>
 
-            <div className="flex items-start justify-between mt-[24px] mx-[26px]">
+            <div className="flex items-start justify-between mt-[22px]">
               <div className="flex flex-col gap-1">
                 <div className="font-bold text-[22px]">{name}</div>
                 <div className="text-[18px]">{titleStr}</div>
@@ -79,8 +76,8 @@ const templateSolidMember = (
               </div>
             </div>
             {hasRoles && (
-              <div className="flex mt-[10px] mx-[24px]" style={{ gap: '6px', width: `${maxWidth}px`, flexWrap: 'wrap' }}>
-                {badges.map((d, i) => (<div className="flex" style={cardStyle} key={'k'+i}><img src={roleMark} width='12px' ></img>{d.label}</div>))}
+              <div className="flex mt-1" style={{ gap: '6px', width: `${maxWidth}px`, flexWrap: 'wrap' }}>
+                {badges.map((d, i) => (<div className="flex items-center" style={cardStyle} key={'k'+i}><img src={roleMark} width='8px' ></img>{d.label}</div>))}
               </div>
               )}
 

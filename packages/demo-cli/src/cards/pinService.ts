@@ -9,23 +9,9 @@ class PinService {
     }
   }
 
-  async pinContentToIPFS (content: string) {
-    const formData = new FormData();
-    // const src = "path/to/file.png";
+  async pinContentToIPFS (content: any) {
 
     const name = `starfish-${Date.now()/1000}.json`;
-
-    formData.append('file', content);
-
-    const pinataMetadata = JSON.stringify({
-      name: 'Starfish Profile',
-    });
-    formData.append('pinataMetadata', pinataMetadata);
-
-    const pinataOptions = JSON.stringify({
-      cidVersion: 0,
-    })
-    formData.append('pinataOptions', pinataOptions);
 
     const body = {
       "pinataContent":content,

@@ -43,6 +43,10 @@ function App() {
       setAccountAddresses(getDemoAccounts());
       setNetwork('mainnet');
     }
+    else if (nodeUrl.includes('testnet')) {
+      setAccountAddresses(getDemoAccounts());
+      setNetwork('testnet');
+    }
   }, []);
 
   const handleInputChanged = async (value: string) => {
@@ -87,23 +91,20 @@ function App() {
         setSubmitError('Invalid address');
         setPending(false)
       })
-
     }
   }
 
-
   return (
     <>
-
-      <div className="flex gap-20 items-center m-8 relative justify-between">
+      <div className="flex gap-20 items-center p-8 relative justify-between">
         <Group>
-          <Avatar src="/assets/images/beach-island.jpg" size={78} radius="xl" />
+          {/*<Avatar src="/assets/images/beach-island.jpg" size={78} radius="xl" />*/}
           <div>
-            <Title> Cocabana </Title>
-            <Text size="xl" c="dimmed">Starfish Identity</Text>
+            {/*<Title> Cocabana </Title>*/}
+            <Text size="xl" c="dimmed">Starfish Identity Demo</Text>
           </div>
         </Group>
-        <Text size="xl" c="dimmed">Cocabana Starfish Identity demo</Text>
+        {/*<Text size="xl" c="dimmed">Cocabana Starfish Identity demo</Text>*/}
         <Text size="lg" tt="lowercase" c={"rgb(247,140,20,0.7)"}>[ {network} ]</Text>
       </div>
       <div className="mt-20 flex flex-col items-center">
@@ -134,30 +135,30 @@ function App() {
           </Group>
         </div>
       </div>
-      { account && (
-          <div className="mt-12 ml-10 flex flex-col gap-4 items-center">
-            <div className="flex flex-col gap-2 ml-4 mt-4">
-              <div className="flex justify-between items-end">
-                <Text size="xl" fw={700}>Address</Text>
-                <Text size="md" c="dimmed">{account.balance}</Text>
-              </div>
-              <Text size="sm" fw={600} c={"rgb(247,140,20)"}>{account.address}</Text>
+      <div className="mt-4 flex flex-col gap-0 items-center">
+        {/*<div className="flex flex-col gap-2 mt-4">*/}
+        {/*  <div className="flex justify-between items-end">*/}
+        {/*    <Text size="xl" fw={700}>Address</Text>*/}
+        {/*    <Text size="md" c="dimmed">{account.balance}</Text>*/}
+        {/*  </div>*/}
+        {/*  <Text size="sm" fw={600} c={"rgb(247,140,20)"}>{account.address}</Text>*/}
+        {/*</div>*/}
+        <Container className="h-[450px] flex justify-center items-center">
+
+          { pending && (<Button variant="outline" mt={4} loading={true} loaderProps={{ type: 'dots' }} color={"rgb(247,140,20)"}>... ...</Button>)}
+          {!pending && !profileCard && account && <Text>No profile found</Text>}
+          {!pending && profileCard && !profileCard.stylesheet && <Text>{profileCard.body}</Text>}
+          {!pending && profileCard && profileCard.stylesheet && (
+            <div className='flex gap-16 flex-wrap items-center'>
+              <style dangerouslySetInnerHTML={{__html: profileCard.stylesheet}}/>
+              <div dangerouslySetInnerHTML={{__html: profileCard.body}} style={{ width: profileCard.width, height: profileCard.height }}/>
             </div>
-            <Container className="rounded-xl w-[650px] h-[450px] flex justify-center items-center">
+          )}
 
-              { pending && (<Button variant="outline" mt={4} loading={true} loaderProps={{ type: 'dots' }} color={"rgb(247,140,20)"}>... ...</Button>)}
-              {!pending && !profileCard && <Text>No profile found</Text>}
-              {!pending && profileCard && !profileCard.stylesheet && <Text>{profileCard.body}</Text>}
-              {!pending && profileCard && profileCard.stylesheet && (
-                <div className='flex gap-16 flex-wrap items-center'>
-                  <style dangerouslySetInnerHTML={{__html: profileCard.stylesheet}}/>
-                  <div dangerouslySetInnerHTML={{__html: profileCard.body}} style={{ width: profileCard.width, height: profileCard.height }}/>
-                </div>
-              )}
 
-            </Container>
-          </div>
-      )}
+        </Container>
+        <Text size="sm" c="dimmed">{account?.address}</Text>
+      </div>
     </>
   )
 }

@@ -1,8 +1,11 @@
 import {starfishAPi} from "@starfish/artifacts";
+import {useState} from "react";
 
 const baseUrl = 'https://coffee-accused-boa-592.mypinata.cloud/ipfs';
 
 export const useProfileCard = () => {
+
+  const [credentials, setCredentials] = useState<string[]>([]);
 
   const getDemoAccounts = () => {
     return starfishAPi.getDemoAccounts();
@@ -10,7 +13,16 @@ export const useProfileCard = () => {
 
   const fetchContent = async (hash: string) => {
     const res = await fetch(`${baseUrl}/${hash}`);
-    const encodedContent = await res.json();
+    const jsonObj = await res.json();
+    let encodedContent = jsonObj;
+    if (typeof jsonObj === 'object') {
+      if(jsonObj.credentials) {
+        setCredentials(jsonObj.credentials);
+      }
+      if(jsonObj.content) {
+        encodedContent = jsonObj.content;
+      }
+    }
     const contentStr = atob(encodedContent);
     const profileCardObj = JSON.parse(contentStr);
 
