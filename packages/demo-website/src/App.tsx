@@ -157,7 +157,7 @@ function App() {
 
 
         </Container>
-        <Text size="sm" c="dimmed">{account?.address}</Text>
+        <Text size="sm" c="dimmed">{account?.address} {account?.balance}</Text>
       </div>
     </>
   )

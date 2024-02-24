@@ -67,7 +67,7 @@ const templateSolidMember = (
             <div className="flex items-start justify-between mt-[22px]">
               <div className="flex flex-col gap-1">
                 <div className="font-bold text-[22px]">{name}</div>
-                <div className="text-[18px]">{titleStr}</div>
+                <div className="text-[16px]">{titleStr}</div>
                 <div className="text-[14px] my-[1px] font-mono">{didLabel}</div>
               </div>
               <div className="flex flex-col">

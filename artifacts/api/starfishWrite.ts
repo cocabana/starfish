@@ -1,6 +1,6 @@
 
 import {ONE_ALPH, stringToHex, web3} from "@alephium/web3";
-import {stringToU256} from "./utils";
+import {getNodeProviderUrl, stringToU256} from "./utils";
 import {starfishAPi, walletApi} from "./";
 import {DIDRecord, Register, SetAttribute} from "../ts";
 
@@ -41,17 +41,28 @@ class StarfishWrite {
         value: stringToHex(value)
       }
     });
-    // console.log(`SetAttribute txid: ${result.txId}`);
 
-    const contractEvents = await web3.getCurrentNodeProvider().events.getEventsTxIdTxid(result.txId);
-    const event = contractEvents.events.find(e => e.eventIndex === DIDRecord.eventIndex.DIDAttributeChanged);
-
-    if (event) {
-      console.log('Success');
+    if (getNodeProviderUrl().includes('mainnet')) {
+      console.log(`Sent SetAttribute tx: https://explorer.alephium.org/transactions/${result.txId}`);
+    }
+    else if (getNodeProviderUrl().includes('testnet')) {
+      console.log(`Sent SetAttribute tx: https://testnet.alephium.org/transactions/${result.txId}`);
     }
     else {
-      throw new Error('Failed to update contract state');
+      console.log(`SetAttribute txid: ${result.txId}`);
     }
+
+    // const contractEvents = await web3.getCurrentNodeProvider().events.getEventsTxIdTxid(result.txId);
+    // const event = contractEvents.events.find(e => e.eventIndex === DIDRecord.eventIndex.DIDAttributeChanged);
+    //
+    // contractEvents.events.find(e => console.log('Event', e));
+    //
+    // if (event) {
+    //   console.log('Success');
+    // }
+    // else {
+    //   throw new Error('Failed to update contract state');
+    // }
   }
 }
 
