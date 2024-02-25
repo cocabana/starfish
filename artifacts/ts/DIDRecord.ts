@@ -89,15 +89,15 @@ class Factory extends ContractFactory<
     ): Promise<TestContractResult<Address>> => {
       return testMethod(this, "getOwner", params);
     },
-    setOwner: async (
+    changeOwner: async (
       params: TestContractParams<DIDRecordTypes.Fields, { newOwner: Address }>
     ): Promise<TestContractResult<null>> => {
-      return testMethod(this, "setOwner", params);
+      return testMethod(this, "changeOwner", params);
     },
     setAttribute: async (
       params: TestContractParams<
         DIDRecordTypes.Fields,
-        { actor: Address; name: bigint; value: HexString; validity: bigint }
+        { name: bigint; value: HexString; validity: bigint }
       >
     ): Promise<TestContractResult<null>> => {
       return testMethod(this, "setAttribute", params);
@@ -105,7 +105,7 @@ class Factory extends ContractFactory<
     revokeAttribute: async (
       params: TestContractParams<
         DIDRecordTypes.Fields,
-        { actor: Address; name: bigint; value: HexString }
+        { name: bigint; value: HexString }
       >
     ): Promise<TestContractResult<null>> => {
       return testMethod(this, "revokeAttribute", params);
@@ -118,7 +118,7 @@ export const DIDRecord = new Factory(
   Contract.fromJson(
     DIDRecordContractJson,
     "",
-    "4661e0f51d42cb8b1fe54c0190d02eea19ce94505abf101d105823c780b38235"
+    "7622e18b2a73a366c0998361ef1d7dc31e48d8e18ed2175996ba04cf37c301da"
   )
 );
 

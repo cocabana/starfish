@@ -1,22 +1,19 @@
 {
   "version": "v2.8.5",
   "name": "RevokeAttribute",
-  "bytecodeTemplate": "01010300000007{1}{2}{3}0f0c{0}0104",
+  "bytecodeTemplate": "01010300000006{1}{2}0e0c{0}0103",
   "fieldsSig": {
     "names": [
-      "registrar",
-      "identity",
+      "record",
       "name",
       "value"
     ],
     "types": [
       "ByteVec",
-      "Address",
       "U256",
       "ByteVec"
     ],
     "isMutable": [
-      false,
       false,
       false,
       false

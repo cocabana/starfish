@@ -6,22 +6,10 @@ Contract DIDRegistrar(
     parentContractId: ByteVec, subContractPath: ByteVec, identity: Address
   )
 
-  fn getDIDRecordContractId(identity: Address, caller: Address) -> ByteVec {
-    let node = addressToByteVec(identity)
-    let didRecordId = subContractId!(node)
-    let didRecord = DIDRecord(didRecordId)
-    checkCaller!(caller == didRecord.getOwner(), ErrorCodes.InvalidCaller)
-    return didRecordId
-  }
-
-  fn addressToByteVec(address: Address) -> ByteVec {
-    return toByteVec!(address)
-  }
-
   @using(preapprovedAssets = true)
   pub fn register(identity: Address) -> () {
       checkCaller!(callerAddress!() == identity, ErrorCodes.InvalidCaller)
-      let node = addressToByteVec(identity)
+      let node = toByteVec!(identity)
       let (immFields, mutFields) = DIDRecord.encodeFields!(identity, identity, 0)
       copyCreateSubContract!{callerAddress!() -> ALPH: 1 alph}(
         node,
@@ -30,22 +18,6 @@ Contract DIDRegistrar(
         mutFields
       )
       emit DIDRegistered(selfContractId!(), node, identity)
-  }
-
-  @using(checkExternalCaller = true)
-  pub fn setAttribute(identity: Address, name: U256, value: ByteVec, validity: U256) -> () {
-    let caller = callerAddress!()
-    checkCaller!(caller == identity, ErrorCodes.InvalidCaller)
-    let didRecordId = getDIDRecordContractId(identity, caller)
-    let didRecord = DIDRecord(didRecordId)
-    didRecord.setAttribute(caller, name, value, validity)
-  }
-
-  @using(checkExternalCaller = false)
-  pub fn revokeAttribute(identity: Address, name: U256, value: ByteVec) -> () {
-    let didRecordId = getDIDRecordContractId(identity, callerAddress!())
-    let didRecord = DIDRecord(didRecordId)
-    didRecord.revokeAttribute(callerAddress!(), name, value)
   }
 
 }

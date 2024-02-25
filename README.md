@@ -6,8 +6,8 @@ A DID registry smart contract is used to manage and present identities in Web3.
 
 Tech Stack (top down)
 - React.js Webpage (Dapp)
-- Node.js CLI (Dapp)
 - HTML templates for Profile Cards
+- Node.js CLI (Dapp)
 - Ralph Smart Contracts
 - Alephium Blockchain
 

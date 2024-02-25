@@ -1,8 +1,8 @@
 {
   "version": "v2.8.5",
   "name": "DIDRecord",
-  "bytecode": "030409402540444060010000000102a0000201000101000fb4a000450c7b1600a10005ce0016005fa0010d2aa101010004040011a0001600450c7b06ce00160116025616032a61a0010d2aa10101000303000fa0001600450c7b06ce00160116020c61a0010d2aa101",
-  "codeHash": "4661e0f51d42cb8b1fe54c0190d02eea19ce94505abf101d105823c780b38235",
+  "bytecode": "03040940254043405e010000000102a0000201000101000fb4a000450c7b1600a10005ce0016005fa0010d2aa101010003030011b4a000450c7b06ce00160016015616022a61a0010d2aa10101000202000fb4a000450c7b06ce00160016010c61a0010d2aa101",
+  "codeHash": "7622e18b2a73a366c0998361ef1d7dc31e48d8e18ed2175996ba04cf37c301da",
   "fieldsSig": {
     "names": [
       "identity",
@@ -62,7 +62,7 @@
       ]
     },
     {
-      "name": "setOwner",
+      "name": "changeOwner",
       "usePreapprovedAssets": false,
       "useAssetsInContract": false,
       "isPublic": true,
@@ -83,19 +83,16 @@
       "useAssetsInContract": false,
       "isPublic": true,
       "paramNames": [
-        "actor",
         "name",
         "value",
         "validity"
       ],
       "paramTypes": [
-        "Address",
         "U256",
         "ByteVec",
         "U256"
       ],
       "paramIsMutable": [
-        false,
         false,
         false,
         false
@@ -108,17 +105,14 @@
       "useAssetsInContract": false,
       "isPublic": true,
       "paramNames": [
-        "actor",
         "name",
         "value"
       ],
       "paramTypes": [
-        "Address",
         "U256",
         "ByteVec"
       ],
       "paramIsMutable": [
-        false,
         false,
         false
       ],

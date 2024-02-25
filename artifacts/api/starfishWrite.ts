@@ -1,8 +1,8 @@
 
-import {ONE_ALPH, stringToHex, web3} from "@alephium/web3";
+import {ONE_ALPH, stringToHex, subContractId, web3} from "@alephium/web3";
 import {getNodeProviderUrl, stringToU256} from "./utils";
 import {starfishAPi, walletApi} from "./";
-import {DIDRecord, Register, SetAttribute} from "../ts";
+import {Register, SetAttribute} from "../ts";
 
 class StarfishWrite {
 
@@ -32,10 +32,10 @@ class StarfishWrite {
   }
 
   async setContractAttribute(identity: string, name: string, value: string) {
+    const recordInstanceId = starfishAPi.resolveSubContractId(identity);
     const result = await SetAttribute.execute(walletApi.getSignerByAddress(identity), {
       initialFields: {
-        registrar: starfishAPi.getDidRegistrarContractId(),
-        identity,
+        record: recordInstanceId,
         name: stringToU256(`did/svc/${name}`),
         validity: 31536000n,
         value: stringToHex(value)

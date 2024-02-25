@@ -15,6 +15,7 @@ import {loadDeployments} from "../../artifacts/ts/deployments";
 import {DIDRecord, DIDRecordTypes, DIDRegistrar, Register, SetAttribute} from "../../artifacts/ts";
 import {addressFromContractId, binToHex} from "@alephium/web3";
 import {NodeWallet} from "@alephium/web3-wallet";
+import {addressToByteVec} from "../testFixture";
 
 describe("end-to-end", () => {
 
@@ -66,19 +67,16 @@ describe("end-to-end", () => {
 
   it("should create, setAttribute", async () => {
 
-    // const signer = await testNodeWallet();
-    // const account = await signer.getSelectedAccount();
-    // const accounts = await signer.getAccounts();
-    // const account = accounts[0];
     const deploys = loadDeployments("devnet");
-    const registrar = deploys.contracts.DIDRegistrar.contractInstance.contractId;
+    const registrarContractId = deploys.contracts.DIDRegistrar.contractInstance.contractId;
+    // const recordContractId = deploys.contracts.DIDRecord.contractInstance.contractId;
+    const recordInstanceId = subContractId(registrarContractId, addressToByteVec(account.address), account.group);
 
     console.log('address', account.address);
 
     const result = await SetAttribute.execute(signer, {
       initialFields: {
-        registrar,
-        identity: account.address,
+        record: recordInstanceId,
         name: stringToU256("did/svc/test1"),
         validity: 31536000n,
         value: stringToHex("value1")
