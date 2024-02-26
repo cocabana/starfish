@@ -19,7 +19,7 @@ type ProfileCard = {
   height: number;
 }
 
-const nodeUrl = import.meta.env.VITE_NODE_PROVIDER_URL;
+const nodeUrl = import.meta.env.VITE_NODE_PROVIDER_URL || '';
 
 if (nodeUrl) {
   setNodeProviderUrl(nodeUrl);
