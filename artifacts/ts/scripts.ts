@@ -11,23 +11,26 @@ import {
   SignerProvider,
   HexString,
 } from "@alephium/web3";
+import { default as ChangeOwnerScriptJson } from "../ChangeOwner.ral.json";
 import { default as RegisterScriptJson } from "../Register.ral.json";
 import { default as RevokeAttributeScriptJson } from "../RevokeAttribute.ral.json";
 import { default as SetAttributeScriptJson } from "../SetAttribute.ral.json";
 
+export const ChangeOwner = new ExecutableScript<{
+  record: HexString;
+  newOwner: Address;
+}>(Script.fromJson(ChangeOwnerScriptJson));
 export const Register = new ExecutableScript<{
   registrar: HexString;
   identity: Address;
 }>(Script.fromJson(RegisterScriptJson));
 export const RevokeAttribute = new ExecutableScript<{
-  registrar: HexString;
-  identity: Address;
+  record: HexString;
   name: bigint;
   value: HexString;
 }>(Script.fromJson(RevokeAttributeScriptJson));
 export const SetAttribute = new ExecutableScript<{
-  registrar: HexString;
-  identity: Address;
+  record: HexString;
   name: bigint;
   value: HexString;
   validity: bigint;

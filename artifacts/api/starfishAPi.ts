@@ -74,8 +74,11 @@ class StarfishAPi {
   }
 
   resolveSubContractAddress(identity: string) {
-    const recordId = subContractId(this.getDidRegistrarContractId(), addressToByteVec(identity), 0);
-    return addressFromContractId(recordId);
+    return addressFromContractId(this.resolveSubContractId(identity));
+  }
+
+  resolveSubContractId(identity: string) {
+    return subContractId(this.getDidRegistrarContractId(), addressToByteVec(identity), 0);
   }
 
   async getDIDLinkedResource(identity: string) {

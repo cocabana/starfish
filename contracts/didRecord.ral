@@ -12,7 +12,7 @@ Contract DIDRecord(
     }
 
     @using(updateFields = true)
-    pub fn setOwner(newOwner: Address) -> () {
+    pub fn changeOwner(newOwner: Address) -> () {
         checkCaller!(callerAddress!() == owner, ErrorCodes.InvalidCaller)
         owner = newOwner
         emit DIDOwnerChanged(identity, newOwner)
@@ -20,15 +20,15 @@ Contract DIDRecord(
     }
 
     @using(updateFields = true)
-    pub fn setAttribute(actor: Address, name: U256, value: ByteVec, validity: U256) -> () {
-      checkCaller!(owner == actor, ErrorCodes.InvalidCaller)
+    pub fn setAttribute(name: U256, value: ByteVec, validity: U256) -> () {
+      checkCaller!(callerAddress!() == owner, ErrorCodes.InvalidCaller)
       emit DIDAttributeChanged(identity, name, value, blockTimeStamp!() + validity)
       changed = changed + 1
     }
 
     @using(updateFields = true)
-    pub fn revokeAttribute(actor: Address, name: U256, value: ByteVec) -> () {
-        checkCaller!(owner == actor, ErrorCodes.InvalidCaller)
+    pub fn revokeAttribute(name: U256, value: ByteVec) -> () {
+        checkCaller!(callerAddress!() == owner, ErrorCodes.InvalidCaller)
         emit DIDAttributeChanged(identity, name, value, 0)
         changed = changed + 1
     }

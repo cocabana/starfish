@@ -58,19 +58,6 @@ class Factory extends ContractFactory<
   }
 
   tests = {
-    getDIDRecordContractId: async (
-      params: TestContractParams<
-        DIDRegistrarTypes.Fields,
-        { identity: Address; caller: Address }
-      >
-    ): Promise<TestContractResult<HexString>> => {
-      return testMethod(this, "getDIDRecordContractId", params);
-    },
-    addressToByteVec: async (
-      params: TestContractParams<DIDRegistrarTypes.Fields, { address: Address }>
-    ): Promise<TestContractResult<HexString>> => {
-      return testMethod(this, "addressToByteVec", params);
-    },
     register: async (
       params: TestContractParams<
         DIDRegistrarTypes.Fields,
@@ -78,22 +65,6 @@ class Factory extends ContractFactory<
       >
     ): Promise<TestContractResult<null>> => {
       return testMethod(this, "register", params);
-    },
-    setAttribute: async (
-      params: TestContractParams<
-        DIDRegistrarTypes.Fields,
-        { identity: Address; name: bigint; value: HexString; validity: bigint }
-      >
-    ): Promise<TestContractResult<null>> => {
-      return testMethod(this, "setAttribute", params);
-    },
-    revokeAttribute: async (
-      params: TestContractParams<
-        DIDRegistrarTypes.Fields,
-        { identity: Address; name: bigint; value: HexString }
-      >
-    ): Promise<TestContractResult<null>> => {
-      return testMethod(this, "revokeAttribute", params);
     },
   };
 }
@@ -103,7 +74,7 @@ export const DIDRegistrar = new Factory(
   Contract.fromJson(
     DIDRegistrarContractJson,
     "",
-    "121b19a2b6ed634c07030dbcd011515f10ac7b6c349248a713b330572e775428"
+    "8f0d8f36bad699312622c50196b1611fe23c792413d88598fa149352493273da"
   )
 );
 

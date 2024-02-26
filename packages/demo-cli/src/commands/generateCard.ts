@@ -5,7 +5,6 @@ import {resolve} from "path";
 import child_process from "child_process";
 import {starfishAPi, walletApi} from "@starfish/artifacts";
 import {pinService} from "../cards/pinService.js";
-import {credentialBuilder} from "@starfish/artifacts/api/credentialBuilder.js";
 
 let lastResult: { content:string, badges: BadgeOptions[] };
 
@@ -43,7 +42,7 @@ export async function pushContentToIpfs() {
     const pAll = lastResult.badges.map(b => walletApi.generateCredential(address, { badge: b }));
     resource.credentials = await Promise.all(pAll);
   }
-  console.log(resource);
+  //console.log(resource);
   return pinService.pinContentToIPFS(resource);
 }
 
