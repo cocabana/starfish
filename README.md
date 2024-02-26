@@ -48,14 +48,14 @@ yarn workspace @starfish/artifacts build
 
 ## Run demo
 ### Demo-CLI
-Command line prompts for blockchain interaction
+Command line prompts for blockchain interaction. Generate a profile card, publish metadata to IPFS and anchor to the Alephium blockchain (devnet).
 ```bash
 cd packages/demo-cli
 yarn start
 ```
 
 ### Demo-Website
-
+View the cards published from the demo-cli
 ```bash
 cd packages/demo-website
 yarn dev
