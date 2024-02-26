@@ -4,16 +4,17 @@ import {QRCodeSVG} from "qrcode.react";
 import {Property} from "csstype";
 
 const templateSolidMember = (
-  {name, did, timestamp, avatar, accentColor, bgColor, bgImg, qrCodeLink, badges, bio, title}: ProfileOptions,
+  {name, did, timestamp, avatar, bgColor, bgImg, qrCodeLink, badges, bio, title}: ProfileOptions,
   options?: SizeOptions
 ) => {
 
   let bgStyle = {};
 
-  // bgImg='https://starfish-f3983.web.app/assets/images/bg-alph.png'
-  avatar = 'https://starfish-f3983.web.app/assets/images/avatar-dead-rare-nft.png';
+  //hard-coded for live demo
+  bgImg='https://starfish-f3983.web.app/assets/images/bg-alph.png'
+  avatar = 'https://starfish-f3983.web.app/assets/images/minion1.png';
   // bgImg = 'linear-gradient(180deg, #4EEF96 0%, #F98CF1 33%, #FDC77C 66%, #625AD1 100%)'
-  bgColor = '#C8F054';
+  // bgColor = '#C8F054';
 
   if (bgColor) {
     bgStyle = { backgroundColor: bgColor }
