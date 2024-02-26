@@ -40,6 +40,7 @@ async function buildProfilePrompt() {
     if(register === '' || register.toLowerCase() === 'y') {
       await setAttributeDid(cid);
       console.log(`CID ${cid} registered to ${address}`);
+      console.log('You may build more cards or view your published card(s) at packages/demo-website');
     }
   }
   else if(final === 'e') {
