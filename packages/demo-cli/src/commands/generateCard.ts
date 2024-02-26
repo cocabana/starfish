@@ -5,18 +5,17 @@ import {resolve} from "path";
 import child_process from "child_process";
 import {starfishAPi, walletApi} from "@starfish/artifacts";
 import {pinService} from "../cards/pinService.js";
-import {credentialBuilder} from "@starfish/artifacts/api/credentialBuilder.js";
 
 let lastResult: { content:string, badges: BadgeOptions[] };
 
-export async function generateCard(address:string, {name, title, badges}: ProfileOptions) {
+export async function generateCard(address:string, {name, bio, badges}: ProfileOptions) {
   const {did} = starfishAPi.getDIDAccount();
   const htmlObj = cardService.renderCard({
     name,
     did,
     timestamp: Date.now(),
     qrCodeLink: `https://starfish-f3983.web.app/${address}`,
-    title,
+    bio,
     badges,
     avatar: 'https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-1.png'
   }, {width: 420, height: 420})

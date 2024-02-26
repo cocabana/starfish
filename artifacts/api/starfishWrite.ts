@@ -14,7 +14,7 @@ class StarfishWrite {
       return;
     }
 
-    await Register.execute(walletApi.getSignerByAddress(identity), {
+    const result = await Register.execute(walletApi.getSignerByAddress(identity), {
       initialFields: {
         registrar: starfishAPi.getDidRegistrarContractId(),
         identity
@@ -22,7 +22,8 @@ class StarfishWrite {
       attoAlphAmount: ONE_ALPH
     });
 
-    console.log('Created new subcontract account for', identity);
+    // console.log('Created new subcontract account for', identity);
+    this.logTxId('Register', result.txId);
 
     //console.log(`Register txid: ${result.txId}`);
 
@@ -42,15 +43,7 @@ class StarfishWrite {
       }
     });
 
-    if (getNodeProviderUrl().includes('mainnet')) {
-      console.log(`Sent SetAttribute tx: https://explorer.alephium.org/transactions/${result.txId}`);
-    }
-    else if (getNodeProviderUrl().includes('testnet')) {
-      console.log(`Sent SetAttribute tx: https://testnet.alephium.org/transactions/${result.txId}`);
-    }
-    else {
-      console.log(`SetAttribute txid: ${result.txId}`);
-    }
+    this.logTxId('SetAttribute', result.txId);
 
     // const contractEvents = await web3.getCurrentNodeProvider().events.getEventsTxIdTxid(result.txId);
     // const event = contractEvents.events.find(e => e.eventIndex === DIDRecord.eventIndex.DIDAttributeChanged);
@@ -63,6 +56,18 @@ class StarfishWrite {
     // else {
     //   throw new Error('Failed to update contract state');
     // }
+  }
+
+  logTxId(command: string, txId: string) {
+    if (getNodeProviderUrl().includes('mainnet')) {
+      console.log(`Sent ${command} tx: https://explorer.alephium.org/transactions/${txId}`);
+    }
+    else if (getNodeProviderUrl().includes('testnet')) {
+      console.log(`Sent ${command} tx: https://testnet.alephium.org/transactions/${txId}`);
+    }
+    else {
+      console.log(`${command} txid: ${txId}`);
+    }
   }
 }
 

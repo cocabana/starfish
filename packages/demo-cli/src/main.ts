@@ -1,8 +1,9 @@
 import {select, input, Separator} from '@inquirer/prompts';
-import {starfishAPi} from "@starfish/artifacts";
+
 import {selectDidByAddress} from "./commands/selectDid.js";
 import {setAttributeDid} from "./commands/setAttributeDid.js";
 import {generateCard, previewCard, pushContentToIpfs} from "./commands/generateCard.js";
+import {starfishAPi} from "@starfish/artifacts";
 
 function demoAccountPrompt() {
   const choices = starfishAPi.getDemoAccounts().map((a) => ({value: a}));
@@ -19,14 +20,14 @@ async function setAttributePrompt() {
 
 async function buildProfilePrompt() {
   const name = await input({ message: 'Profile fields - Enter a name to be shown on card:', validate: (value) => value.length > 0 || 'Please enter a name' });
-  const title = await input({ message: 'Profile fields - Enter a title (optional): ' });
+  const bio = await input({ message: 'Profile fields - Enter a bio or tagline (optional): ' });
   const badgeList = await input({ message: 'Profile fields - Enter badge labels comma separated (optional): ' });
   const address = starfishAPi.getDIDAccount().address;
   let badges = [];
   if(badgeList) {
     badges = badgeList.split(',').map((b) => b.trim()).map((b) => ({label: b, provider: 'alephium'}));
   }
-  await generateCard(address, {name, title, badges})
+  await generateCard(address, {name, bio, badges})
   const preview = await input({ message: 'Would you like to preview? (Y/n)', validate: (value) => value === '' || value.toLowerCase() === 'y' || value.toLowerCase() === 'n' || 'Please enter y or n' });
   if(preview === '' || preview.toLowerCase() === 'y') {
     await previewCard();
